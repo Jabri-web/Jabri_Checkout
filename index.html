@@ -1,93 +1,45 @@
 <!DOCTYPE html>
-<!-- file=index.html | repo= Jabri-web -->
+<!-- Jabri_Checkout | Compiler Pass2 Test -->
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Abdulla Al-Jabri - مكتبة اليمن</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jabri_Checkout Test</title>
 <script>
-// ___future_________ Compiler Pass2: github.io → vercel.app
 (function(){
-  // Pass1: المتصفح يقرأ HTML فاضي
-  // Pass2: احنا نبني الـ DOM كله بـ JS + نبدل الروابط
-
-  // 1. اد-هوك ايرور
-  window.addEventListener('error', function(e){
-    console.error("You have to check this:", e.message);
-  });
-
-  // 2. بيانات الازرار
-  const links = [
-    {ar:"سندباد اليمن", en:"Yemen Sindbad", url:"https://jabri-web.github.io/jabri62018.github.io/"},
-    {ar:"طائر اليمن", en:"Yemen Bird", url:"https://jabri-web.github.io/Zx_RieOS_v1.2"},
-    {ar:"عنكبوت اليمن", en:"Yemen Ankaboot", url:"https://jabri-web.github.io/Zx_Mother_Function_Jabri"},
-    {ar:"صفحات وبحوث", en:"Pages & Researches", url:"https://jabri-web.github.io/Pages-Researches.html"},
-    {ar:"مكتبتي", en:"My Library", url:"https://jabri-web.github.io/Yemen-library.html"}
-  ];
-
-  // 3. Pass2 - تبديل github.io بالقيمة النهائية
+  // Pass2: استبدال github.io بالدومين الحالي
   const x = 'github.io';
   const y = location.hostname;
-  const finalLinks = links.map(l => {
-    if(y!== x && !y.includes('localhost') && l.url.includes(x)){
-      l.url = l.url.replace(/github\.io(?=\/|$)/g, y);
-    }
-    return l;
-  });
+  
+  window.addEventListener('error', e => console.error("Check:", e.message));
 
-  // 4. بناء الصفحة كاملة بـ JS
-  document.body.style.cssText = "margin:0;padding:0;font-family:Tahoma,sans-serif;background:#f5f7fa;color:#000;min-height:100svh;display:flex;flex-direction:column";
+  // بناء الصفحة
+  document.body.style.cssText = "margin:0;padding:50px 20px;font-family:Tahoma;background:#f5f7fa;text-align:center";
   
   document.body.innerHTML = `
-    <header style="background:linear-gradient(135deg,#0a3d62,#1e6f9f);color:white;text-align:center;padding:2vh 10px;border-bottom:3px solid #f39c12">
-      <img src="Yemen-bird.png" alt="طائر اليمن" style="width:75px;height:75px;border-radius:50%;border:2px solid #00ff88;display:block;margin:0 auto 1vh">
-      <h1 style="font-size:5vw;max-font-size:20px;margin:0;font-weight:bold">Republic of Yemen الجمهورية اليمنية</h1>
-      <p style="font-size:3vw;max-font-size:12px;margin:1vh 0 0 0;opacity:0.9">Riemann zeta & Cosmology</p>
-    </header>
-
-    <div style="width:90%;max-width:500px;margin:0 auto;padding:2vh 0;flex:1;display:flex;flex-direction:column;text-align:center;min-height:80svh">
-      <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:1vh">
-        <span style="font-size:6vw">👁️</span>
-        <h2 style="font-size:6vw;margin:0">سندباد اليمن</h2>
-        <span style="font-size:6vw">👁️</span>
-      </div>
-      <div style="font-size:4vw;font-weight:bold;margin-bottom:0.5vh">م/عبدالله الجبري</div>
-      <div style="font-size:3vw;color:#555;margin-bottom:4vh">Eng. Abdulla Al-Jabri</div>
-
-      ${finalLinks.map(l => `
-        <a href="${l.url}" target="_blank" style="display:flex;justify-content:space-between;align-items:center;width:100%;margin:1vh 0;padding:2vh;background:#000;color:#fff;font-size:4vw;font-weight:bold;border-radius:15px;text-decoration:none;box-sizing:border-box">
-          <span>${l.ar}</span> <span>${l.en}</span>
-        </a>
-      `).join('')}
-
-      <button onclick="history.back()" style="display:flex;justify-content:space-between;align-items:center;width:100%;margin:1vh 0;padding:2vh;background:#c62828;color:#fff;font-size:4vw;font-weight:bold;border-radius:15px;border:none;cursor:pointer;box-sizing:border-box">
-        <span>🚪 Exit</span> <span>خروج</span>
-      </button>
-
-      <div id="info" style="margin-top:2vh;padding:2vh;background:white;border-radius:12px;text-align:right;font-size:3vw;color:#333;line-height:1.8;border:1px solid #ddd;box-sizing:border-box">
-        <b style="color:#0a3d62">التاريخ:</b> <span id="date">...</span><br>
-        <b style="color:#0a3d62">الوقت:</b> <span id="time">...</span><br>
-        <b style="color:#0a3d62">من نحن:</b> مكتبة اليمن الرقمية
-      </div>
-    </div>
-
-    <footer style="background:#0a3d62;color:white;text-align:center;padding:2vh 10px;font-size:3vw;border-top:3px solid #f39c12">
-      <p style="margin:0">© 2026 Yemen Sindbad - جميع الحقوق محفوظة</p>
-      <p style="margin:0">صنع بحب في اليمن 🇾🇪</p>
-    </footer>
+    <h1>👁️ Jabri_Checkout Compiler Test 👁️</h1>
+    <p>الدومين الحالي: <b>${y}</b></p>
+    <p>لو انت على Vercel المفروض تشوف <b>vercel.app</b> بدل <b>github.io</b></p>
+    
+    <a href="https://Jabri-web.github.io/Zx_RieOS_v1.2/" target="_blank" 
+       style="display:block;margin:20px auto;padding:18px;max-width:400px;background:#000;color:#fff;text-decoration:none;border-radius:15px;font-weight:bold">
+       اختبار الرابط - Zx_RieOS_v1.2
+    </a>
+    
+    <div id="result" style="margin-top:30px;padding:20px;background:white;border-radius:12px;border:1px solid #ddd"></div>
   `;
 
-  // 5. التاريخ والوقت
-  function updateTime() {
-    const now = new Date();
-    document.getElementById('date').innerText = now.toLocaleDateString('ar-EG');
-    document.getElementById('time').innerText = now.toLocaleTimeString('ar-EG');
-  }
-  updateTime();
-  setInterval(updateTime, 1000);
-
+  // بعد ما يبني الصفحة، يعدل الروابط
+  setTimeout(()=>{
+    document.querySelectorAll('a').forEach(a => {
+      if(a.href.includes(x)){
+        const old = a.href;
+        a.href = a.href.replace(/github\.io/g, y);
+        document.getElementById('result').innerHTML += `<p>✅ تم التعديل: ${old} → ${a.href}</p>`;
+      }
+    });
+  }, 100);
 })();
-<!-- ____future_______ End -->
 </script>
 </head>
 <body></body>
