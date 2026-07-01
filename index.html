@@ -1,6 +1,3 @@
-<! File=index.html
-<! Repo= Jabri_Checkout
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -17,7 +14,7 @@ h2{color:#6ae3ff;margin:20px 0 10px;font-size:18px;font-weight:400}
 .card{border:2px solid #6ae3ff;border-radius:12px;padding:30px 20px;margin:20px auto;max-width:400px;position:relative}
 .card h1{font-size:1.8em;color:#fff;margin-bottom:5px}
 .card p{font-size:1.1em;color:#6ae3ff}
-.arrow{position:absolute;top:50%;transform:translateY(-50%);font-size:30px;color:#6ae3ff;cursor:pointer}
+.arrow{position:absolute;top:50%;transform:translateY(-50%);font-size:30px;color:#6ae3ff;cursor:pointer;user-select:none}
 .arrow.left{left:-40px}
 .arrow.right{right:-40px}
 .btn{background:#6ae3ff;color:#000;border:none;padding:10px 30px;border-radius:6px;font-weight:bold;cursor:pointer;margin:20px 0;font-size:16px}
@@ -33,25 +30,25 @@ td{padding:12px 8px;border-bottom:1px solid #222;font-size:14px}
 <body>
 
 <div class="topbar">
-<span>�9�2</span>
+<span>”9Æ2</span>
 <span>Jabri-web.org</span>
-<span>+ �� �6�7</span>
+<span>+ ¡õ 6å7</span>
 </div>
 
 <h2>Featured Communities</h2>
 <div class="badge">Yemen PY</div>
 
 <div class="card">
-<span class="arrow left"><</span>
-<h1>Jabri-Yemen</h1>
-<p>open Research<br>Repository</p>
-<span class="arrow right">></span>
+<span class="arrow left" onclick="prevCard()"><</span>
+<h1 id="repoName">Jabri-Yemen</h1>
+<p id="repoDesc">open Research<br>Repository</p>
+<span class="arrow right" onclick="nextCard()">></span>
 </div>
 
-<button class="btn">Browse</button>
+<button class="btn" onclick="browseRepo()">Browse</button>
 
 <div class="uploads">
-<h3>�� Recent Uploads</h3>
+<h3>¡ñ Recent Uploads</h3>
 <table>
 <tr>
 <th>Date (V)</th>
@@ -61,15 +58,47 @@ td{padding:12px 8px;border-bottom:1px solid #222;font-size:14px}
 <tr>
 <td>Jabri-Identity</td>
 <td></td>
-<td><button class="open-btn">�9�8 Open</button></td>
+<td><button class="open-btn" onclick="openLink('https://github.com/Jabri-Identity')">”9ä8 Open</button></td>
 </tr>
 <tr>
 <td>June1,2026 (v1)<br>Jabri-library</td>
 <td>Database</td>
-<td><button class="open-btn">�9�8 Open</button></td>
+<td><button class="open-btn" onclick="openLink('https://github.com/Jabri-library')">”9ä8 Open</button></td>
 </tr>
 </table>
 </div>
+
+<script>
+const REPO_URL = "https://github.com/MohammedAbduljabbar1996/Jabri_Checkout"; // غيره لرابطك
+
+const cards = [
+  {name: "Jabri-Yemen", desc: "open Research<br>Repository", url: REPO_URL},
+  {name: "Jabri-Library", desc: "Database<br>Collection", url: "https://github.com/Jabri-library"},
+  {name: "Jabri-Identity", desc: "Identity<br>System", url: "https://github.com/Jabri-Identity"}
+];
+let current = 0;
+
+function browseRepo(){
+  window.open(REPO_URL, '_blank'); // يفتح المستودع في تبويب جديد
+}
+
+function openLink(url){
+  window.open(url, '_blank');
+}
+
+function nextCard(){
+  current = (current + 1) % cards.length;
+  updateCard();
+}
+function prevCard(){
+  current = (current - 1 + cards.length) % cards.length;
+  updateCard();
+}
+function updateCard(){
+  document.getElementById('repoName').innerHTML = cards[current].name;
+  document.getElementById('repoDesc').innerHTML = cards[current].desc;
+}
+</script>
 
 </body>
 </html>
