@@ -1,0 +1,94 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- ======== اللغات و الكانونيكال ======== -->
+  <link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/ar/" />
+  <link rel="alternate" hreflang="en" href="https://jabri-com.vercel.app/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://jabri-com.vercel.app/" />
+  <link rel="canonical" href="https://jabri-com.vercel.app/" />
+  
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <title>واحة الجبري | Heaven Al-Jabri - تراث اليمن العريق وبوابة السندباد</title>
+  <meta name="description" content="واحة الجبري Heaven Al-Jabri: توثيق تراث اليمن العريق صنعاء شبام سقطرى والأبحاث العلمية نظرية السندباد الموحدة Z+C+A=1. م/ عبدالله محمد ناصر الجبري.">
+  
+  <!-- باقي الميتا تاق حقك ... -->
+  
+  <!-- ======== خط Cairo ======== -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <!-- ======== استايل الموسيقى والزوار ======== -->
+  <style>
+  .top-btn {
+    position: fixed; top: 20px; z-index: 9999; height: 45px;
+    border: none; border-radius: 30px; font-weight: bold; font-family: 'Cairo', sans-serif;
+    cursor: pointer; text-decoration: none; box-shadow: 0 0 15px rgba(106, 227, 255, 0.4);
+    transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0 18px;
+  }
+  .music-btn { right: 20px; width: 50px; background: #6ae3ff; color: #0a0a0f; font-size: 24px; animation: pulse 2s infinite; }
+  .music-btn:hover { transform: scale(1.1); }
+  .music-btn.playing { background: #ff6a6a; color: #fff; animation: none; }
+  .visitor-btn { left: 20px; background: #6affb5; color: #0a0a0f; font-size: 15px; }
+  .visitor-btn:hover { transform: scale(1.05); }
+  #visitorCount { font-size: 16px; font-weight: 900; }
+  @keyframes pulse {0%{box-shadow:0 0 0 0 rgba(106,227,255,.7)}70%{box-shadow:0 0 0 15px rgba(106,227,255,0)}100%{box-shadow:0 0 0 0 rgba(106,227,255,0)}}
+  [dir="ltr"] .music-btn { right: auto; left: 20px; }
+  [dir="ltr"] .visitor-btn { left: auto; right: 20px; }
+  </style>
+</head>
+
+<body>
+<!-- ===== زر الموسيقى الثابت ===== -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="image/music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ===== زر عداد الزوار ===== -->
+<a href="visitor.html" id="visitorBtn" class="top-btn visitor-btn">
+  <span id="visitorText">زوار</span> <span id="visitorCount">1</span>
+</a>
+
+<button id="musicBtn" class="top-btn music-btn" title="تشغيل / إيقاف">🎵</button>
+
+<!-- ===== سكربت الموسيقى والزوار ===== -->
+<script>
+// ====== كود الموسيقى ======
+const music = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('musicBtn');
+let isPlaying = false;
+music.volume = 0.4;
+
+musicBtn.addEventListener('click', () => {
+  if (isPlaying) {
+    music.pause();
+    musicBtn.innerHTML = '🎵';
+    musicBtn.classList.remove('playing');
+    isPlaying = false;
+  } else {
+    music.play().then(() => {
+      musicBtn.innerHTML = '🔇';
+      musicBtn.classList.add('playing');
+      isPlaying = true;
+    }).catch(e => console.log('خطأ:', e));
+  }
+});
+
+// ====== كود عداد الزوار + تبديل اللغة ======
+let count = localStorage.getItem('visitorCount') || 1;
+count = parseInt(count);
+
+function updateVisitorText() {
+  const lang = document.documentElement.lang;
+  document.getElementById('visitorText').innerText = lang === 'ar' ? 'زوار' : 'Visitors';
+  document.getElementById('visitorCount').innerText = count;
+}
+updateVisitorText();
+
+setInterval(() => {
+  count++;
+  localStorage.setItem('visitorCount', count);
+  document.getElementById('visitorCount').innerText = count;
+}, 30000);
+</script>
+
+</body>
