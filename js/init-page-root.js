@@ -1,129 +1,122 @@
 // js/init-page-root.js
-// Loads header and footer from root directory
+// تحميل الهيدر والفوتر من الجذر
 
-async function initPage() {
-  try {
-    console.log('🔄 Loading header and footer from root...');
+(async function initPage() {
+    console.log('🔄 [init-page-root] بدء تحميل الهيدر والفوتر...');
     
-    // 1️⃣ LOAD HEADER
-    const headerResponse = await fetch('header.html');
-    if (!headerResponse.ok) {
-      throw new Error(`Header not found (${headerResponse.status})`);
-    }
-    const headerHTML = await headerResponse.text();
-    console.log('📄 Header HTML loaded, length:', headerHTML.length);
-    
-    const parser = new DOMParser();
-    const headerDoc = parser.parseFromString(headerHTML, 'text/html');
-    
-    // Extract head content
-    let headContent = headerDoc.head.innerHTML;
-    
-    // Remove duplicate title
-    const titleMatch = headContent.match(/<title>.*?<\/title>/);
-    if (titleMatch) {
-      headContent = headContent.replace(titleMatch[0], '');
-    }
-    
-    // Inject header content
-    document.head.insertAdjacentHTML('beforeend', headContent);
-    console.log('✅ Header head content injected');
-    
-    // Handle body content from header
-    const headerBodyContent = headerDoc.body.innerHTML;
-    if (headerBodyContent.trim()) {
-      const container = document.createElement('div');
-      container.id = 'header-body-content';
-      container.style.display = 'none';
-      document.body.prepend(container);
-      container.innerHTML = headerBodyContent;
-      console.log('✅ Header body content stored');
-    }
-    
-    // Execute scripts from header
-    const headerScripts = document.querySelectorAll('#header-body-content script');
-    console.log(`📜 Found ${headerScripts.length} scripts in header`);
-    headerScripts.forEach((script, index) => {
-      const newScript = document.createElement('script');
-      if (script.src) {
-        newScript.src = script.src;
-      } else {
-        newScript.textContent = script.textContent;
-      }
-      document.head.appendChild(newScript);
-      console.log(`✅ Script ${index + 1} executed`);
-    });
-    
-    // 2️⃣ LOAD FOOTER
-    const footerResponse = await fetch('footer.html');
-    if (!footerResponse.ok) {
-      throw new Error(`Footer not found (${footerResponse.status})`);
-    }
-    const footerHTML = await footerResponse.text();
-    console.log('📄 Footer HTML loaded, length:', footerHTML.length);
-    
-    const footerDoc = parser.parseFromString(footerHTML, 'text/html');
-    
-    // Replace footer placeholder
-    const footerPlaceholder = document.getElementById('footer-placeholder');
-    if (footerPlaceholder) {
-      const footerContent = footerDoc.body.innerHTML;
-      footerPlaceholder.outerHTML = footerContent;
-      console.log('✅ Footer loaded successfully');
-      document.dispatchEvent(new Event('footerLoaded'));
-    } else {
-      console.warn('⚠️ Footer placeholder not found');
-    }
-    
-    // Inject footer head content
-    if (footerDoc.head.innerHTML.trim()) {
-      document.head.insertAdjacentHTML('beforeend', footerDoc.head.innerHTML);
-    }
-    
-    // 3️⃣ Initialize language after scripts load
-    setTimeout(() => {
-      const savedLang = localStorage.getItem('preferred-language') || 'ar';
-      console.log('🌐 Setting language to:', savedLang);
-      
-      document.documentElement.lang = savedLang;
-      document.documentElement.dir = savedLang === 'ar' ? 'rtl' : 'ltr';
-      document.body.classList.add(savedLang);
-      
-      if (typeof updateHeadLang === 'function') {
-        updateHeadLang();
-        console.log('✅ updateHeadLang called');
-      }
-      
-      if (typeof updateFooterLang === 'function') {
-        updateFooterLang();
-        console.log('✅ updateFooterLang called');
-      }
-      
-      // Update button states
-      const langAr = document.getElementById('lang-ar');
-      const langEn = document.getElementById('lang-en');
-      if (langAr) langAr.classList.toggle('active', savedLang === 'ar');
-      if (langEn) langEn.classList.toggle('active', savedLang === 'en');
-      
-      console.log('🎉 Root page initialization complete!');
-    }, 200);
-    
-  } catch (error) {
-    console.error('❌ Error:', error);
-    const footerPlaceholder = document.getElementById('footer-placeholder');
-    if (footerPlaceholder) {
-      footerPlaceholder.innerHTML = `
+    try {
+        // =============================================
+        //  1️⃣ تحميل الهيدر
+        // =============================================
+        console.log('📄 [init-page-root] جاري تحميل الهيدر...');
+        const headerResponse = await fetch('/header.html');
+        if (!headerResponse.ok) {
+            throw new Error(`الهيدر غير موجود (${headerResponse.status})`);
+        }
+        const headerHTML = await headerResponse.text();
+        console.log('✅ [init-page-root] تم تحميل الهيدر بنجاح');
+        
+        // ✅ إضافة محتوى الهيدر إلى الصفحة (ظاهر)
+        const headerPlaceholder = document.getElementById('header-placeholder');
+        if (headerPlaceholder) {
+            headerPlaceholder.innerHTML = headerHTML;
+            console.log('✅ [init-page-root] تم وضع الهيدر في المكان المخصص');
+            
+            // تنفيذ سكريبتات الهيدر
+            const headerScripts = headerPlaceholder.querySelectorAll('script');
+            console.log(`📜 [init-page-root] عدد سكريبتات الهيدر: ${headerScripts.length}`);
+            headerScripts.forEach((script, index) => {
+                const newScript = document.createElement('script');
+                if (script.src) {
+                    newScript.src = script.src;
+                } else {
+                    newScript.textContent = script.textContent;
+                }
+                document.head.appendChild(newScript);
+                console.log(`✅ [init-page-root] تم تنفيذ سكريبت الهيدر ${index + 1}`);
+            });
+            
+            // ✅ إظهار الهيدر بعد التحميل
+            headerPlaceholder.style.display = 'block';
+            
+            // تحديث اللغة في الهيدر
+            if (typeof window.updateHeaderLang === 'function') {
+                window.updateHeaderLang();
+            }
+            
+        } else {
+            console.warn('⚠️ [init-page-root] عنصر header-placeholder غير موجود');
+        }
+        
+        // =============================================
+        //  2️⃣ تحميل الفوتر
+        // =============================================
+        console.log('📄 [init-page-root] جاري تحميل الفوتر...');
+        const footerResponse = await fetch('/footer.html');
+        if (!footerResponse.ok) {
+            throw new Error(`الفوتر غير موجود (${footerResponse.status})`);
+        }
+        const footerHTML = await footerResponse.text();
+        console.log('✅ [init-page-root] تم تحميل الفوتر بنجاح');
+        
+        // وضع الفوتر في المكان المخصص
+        const footerPlaceholder = document.getElementById('footer-placeholder');
+        if (footerPlaceholder) {
+            footerPlaceholder.innerHTML = footerHTML;
+            console.log('✅ [init-page-root] تم وضع الفوتر في المكان المخصص');
+            
+            // تنفيذ سكريبتات الفوتر
+            const footerScripts = footerPlaceholder.querySelectorAll('script');
+            console.log(`📜 [init-page-root] عدد سكريبتات الفوتر: ${footerScripts.length}`);
+            footerScripts.forEach((script, index) => {
+                const newScript = document.createElement('script');
+                if (script.src) {
+                    newScript.src = script.src;
+                } else {
+                    newScript.textContent = script.textContent;
+                }
+                document.body.appendChild(newScript);
+                console.log(`✅ [init-page-root] تم تنفيذ سكريبت الفوتر ${index + 1}`);
+            });
+            
+            // تحديث اللغة في الفوتر
+            if (typeof window.updateFooterLang === 'function') {
+                window.updateFooterLang();
+            }
+            
+            // إعلام بأن الفوتر تم تحميله
+            document.dispatchEvent(new Event('footerLoaded'));
+            console.log('✅ [init-page-root] تم إرسال حدث footerLoaded');
+            
+        } else {
+            console.warn('⚠️ [init-page-root] عنصر footer-placeholder غير موجود');
+        }
+        
+        // =============================================
+        //  3️⃣ تطبيق اللغة المحفوظة
+        // =============================================
+        const savedLang = localStorage.getItem('preferred-language') || 'ar';
+        if (typeof window.applyLanguage === 'function') {
+            window.applyLanguage(savedLang);
+        } else {
+            // إذا لم توجد applyLanguage، نطبق اللغة يدوياً
+            document.documentElement.lang = savedLang;
+            document.documentElement.dir = savedLang === 'ar' ? 'rtl' : 'ltr';
+            document.body.classList.add(savedLang);
+        }
+        
+        console.log('🎉 [init-page-root] تم تحميل الهيدر والفوتر بنجاح!');
+        
+    } catch (error) {
+        console.error('❌ [init-page-root] خطأ في تحميل المكونات:', error);
+        const footerPlaceholder = document.getElementById('footer-placeholder');
+        if (footerPlaceholder) {
+            footerPlaceholder.innerHTML = `
                 <div style="background: #1a1a2e; color: #888; padding: 2rem; text-align: center; border-top: 1px solid #333;">
-                    <p>⚠️ Footer could not be loaded. Please refresh the page.</p>
-                    <p style="font-size: 12px; color: #666;">Error: ${error.message}</p>
+                    <p>⚠️ لم يتم تحميل الفوتر. يرجى تحديث الصفحة.</p>
+                    <p style="font-size: 12px; color: #666;">خطأ: ${error.message}</p>
                 </div>
             `;
+        }
     }
-  }
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initPage);
-} else {
-  initPage();
-}
+})();
