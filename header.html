@@ -1,9 +1,105 @@
-<!-- header.html -->
-<div style="background: #00ffc8; color: #000; padding: 8px 16px; text-align: center; font-weight: bold; font-size: 14px; position: fixed; top: 70px; left: 50%; transform: translateX(-50%); z-index: 99999; border-radius: 8px;">
-    ✅ الهيدر يصل من الفتش
+<!-- ============================================= -->
+<!--  header.html - مع شاشة انتظار  -->
+<!-- ============================================= -->
+
+<!-- ===== شاشة الانتظار (تظهر أولاً) ===== -->
+<div id="loadingScreen" style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0a0a0f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 999999;
+    transition: opacity 0.8s ease;
+">
+    <div style="
+        font-size: 3rem;
+        margin-bottom: 20px;
+        animation: spin 1.5s linear infinite;
+    ">🌀</div>
+    <div style="
+        color: #6ae3ff;
+        font-family: 'Cairo', sans-serif;
+        font-size: 1.2rem;
+        font-weight: bold;
+    ">
+        <span class="ar-text">جاري تحميل واحة الجبري...</span>
+        <span class="en-text">Loading Heaven Al-Jabri...</span>
+    </div>
+    <div style="
+        margin-top: 15px;
+        width: 200px;
+        height: 3px;
+        background: #1a1a2e;
+        border-radius: 2px;
+        overflow: hidden;
+    ">
+        <div id="loadingBar" style="
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #6ae3ff, #00ffc8);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        "></div>
+    </div>
 </div>
 
-<!-- ===== باقي الهيدر (الأزرار) ===== -->
+<style>
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    #loadingScreen.hide {
+        opacity: 0;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    // ===== التحكم في شاشة الانتظار =====
+    let loadingProgress = 0;
+    const loadingBar = document.getElementById('loadingBar');
+    
+    function updateLoading(progress) {
+        loadingProgress = Math.min(progress, 100);
+        if (loadingBar) {
+            loadingBar.style.width = loadingProgress + '%';
+        }
+    }
+    
+    // بدء التحميل
+    updateLoading(10);
+    
+    // عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', function() {
+        updateLoading(50);
+    });
+    
+    // عند تحميل كل الصور والملفات
+    window.addEventListener('load', function() {
+        updateLoading(100);
+        // إخفاء شاشة الانتظار بعد ثانية
+        setTimeout(function() {
+            const screen = document.getElementById('loadingScreen');
+            if (screen) {
+                screen.classList.add('hide');
+                setTimeout(function() {
+                    screen.style.display = 'none';
+                }, 800);
+            }
+        }, 500);
+    });
+    
+    // جعل الدالة متاحة للتحديث من الصفحة الرئيسية
+    window.updateLoading = updateLoading;
+</script>
+
+<!-- ===== الأزرار (تظهر بعد إخفاء شاشة الانتظار) ===== -->
 <audio id="bgMusic" loop preload="auto">
     <source src="image/music.mp3" type="audio/mpeg">
 </audio>
@@ -16,4 +112,147 @@
     <span id="visitorCount">1</span>
 </a>
 
-<!-- ... باقي الـ CSS والـ JavaScript ... -->
+<style>
+    .top-btn {
+        position: fixed;
+        top: 20px;
+        z-index: 99999 !important;
+        height: 45px;
+        border: none;
+        border-radius: 30px;
+        font-weight: bold;
+        font-family: 'Cairo', sans-serif;
+        cursor: pointer;
+        text-decoration: none;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 0 18px;
+        font-size: 14px;
+        box-shadow: 0 0 15px rgba(106, 227, 255, 0.4);
+        transition: 0.3s;
+        opacity: 0;
+        transform: translateY(-10px);
+        animation: fadeInDown 0.5s ease forwards;
+        animation-delay: 1.2s;
+    }
+    .music-btn {
+        right: 20px;
+        width: 50px;
+        background: #6ae3ff;
+        color: #0a0a0f;
+        font-size: 22px;
+        animation: pulse 2s infinite, fadeInDown 0.5s ease forwards;
+        animation-delay: 1.2s;
+    }
+    .music-btn.playing {
+        background: #ff6a6a;
+        color: #fff;
+        animation: none;
+    }
+    .visitor-btn {
+        left: 20px;
+        background: linear-gradient(135deg, #6affb5, #3bcb8a);
+        color: #0a0a0f;
+        font-size: 14px;
+        padding: 0 16px;
+        animation-delay: 1.4s;
+    }
+    #visitorCount {
+        font-size: 16px;
+        font-weight: 900;
+        background: rgba(0,0,0,0.15);
+        padding: 0 8px;
+        border-radius: 12px;
+        min-width: 28px;
+        text-align: center;
+    }
+    
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(106, 227, 255, 0.7); }
+        70% { box-shadow: 0 0 0 15px rgba(106, 227, 255, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(106, 227, 255, 0); }
+    }
+    
+    @keyframes fadeInDown {
+        0% { opacity: 0; transform: translateY(-10px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
+    
+    [dir="ltr"] .music-btn { right: auto; left: 20px; }
+    [dir="ltr"] .visitor-btn { left: auto; right: 20px; }
+    
+    @media (max-width: 600px) {
+        .top-btn { height: 38px; font-size: 12px; padding: 0 12px; top: 10px; }
+        .music-btn { width: 40px; font-size: 18px; right: 10px; }
+        .visitor-btn { left: 10px; font-size: 11px; padding: 0 10px; }
+        #visitorCount { font-size: 13px; min-width: 22px; }
+    }
+</style>
+
+<script>
+// ===== كود الموسيقى =====
+(function() {
+    const music = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicBtn');
+    if (!music || !musicBtn) return;
+    
+    let isPlaying = false;
+    music.volume = 0.4;
+    
+    musicBtn.addEventListener('click', function() {
+        if (isPlaying) {
+            music.pause();
+            musicBtn.innerHTML = '🎵';
+            musicBtn.classList.remove('playing');
+            isPlaying = false;
+        } else {
+            music.play()
+                .then(() => {
+                    musicBtn.innerHTML = '🔇';
+                    musicBtn.classList.add('playing');
+                    isPlaying = true;
+                })
+                .catch(() => {});
+        }
+    });
+    
+    document.addEventListener('click', function firstClick() {
+        if (!isPlaying) {
+            music.play()
+                .then(() => {
+                    musicBtn.innerHTML = '🔇';
+                    musicBtn.classList.add('playing');
+                    isPlaying = true;
+                })
+                .catch(() => {});
+        }
+        document.removeEventListener('click', firstClick);
+    }, { once: true });
+})();
+
+// ===== كود عداد الزوار =====
+(function() {
+    const counterEl = document.getElementById('visitorCount');
+    const textEl = document.getElementById('visitorText');
+    if (!counterEl) return;
+    
+    let count = parseInt(localStorage.getItem('visitorCount')) || 1;
+    
+    function updateVisitorText() {
+        const lang = document.documentElement.lang || 'ar';
+        if (textEl) textEl.innerText = lang === 'en' ? 'Visitors' : 'زوار';
+        if (counterEl) counterEl.innerText = count;
+    }
+    updateVisitorText();
+    
+    setInterval(() => {
+        count++;
+        localStorage.setItem('visitorCount', count);
+        if (counterEl) counterEl.innerText = count;
+    }, 30000);
+    
+    window.updateHeaderLang = updateVisitorText;
+})();
+</script>
