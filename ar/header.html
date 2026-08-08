@@ -12,12 +12,12 @@
   <meta http-equiv="Expires" content="0">
   
   <!-- ====================================================================== -->
-  <!-- 2. اللغات والكانونيكال -->
+  <!-- 2. اللغات والكانونيكال (SEO الأساسي) -->
   <!-- ====================================================================== -->
-  <link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/ar/" />
+  <link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/" />
   <link rel="alternate" hreflang="en" href="https://jabri-com.vercel.app/en/" />
   <link rel="alternate" hreflang="x-default" href="https://jabri-com.vercel.app/" />
-  <link rel="canonical" href="https://jabri-com.vercel.app/ar/" />
+  <link rel="canonical" href="https://jabri-com.vercel.app/" />
   
   <!-- ✅ تم إزالة noindex/nofollow - الصفحة مفهرسة بالكامل -->
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -64,7 +64,7 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="صورة الباحث اليمني عبدالله الجبري - واحة الجبري">
-  <meta property="og:url" content="https://jabri-com.vercel.app/ar/">
+  <meta property="og:url" content="https://jabri-com.vercel.app/">
   <meta property="og:updated_time" content="2026-08-07T18:20:00+03:00">
   
   <!-- ====================================================================== -->
@@ -102,7 +102,7 @@
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "url": "https://jabri-com.vercel.app/ar/",
+    "url": "https://jabri-com.vercel.app/",
     "potentialAction": {
       "@type": "SearchAction",
       "target": "https://jabri-com.vercel.app/search?q={search_term_string}",
@@ -112,7 +112,7 @@
   </script>
   
   <!-- ====================================================================== -->
-  <!-- 11. JSON-LD (نفس الجذر مع تغيير الـ URL) -->
+  <!-- 11. JSON-LD -->
   <!-- ====================================================================== -->
   <script type="application/ld+json">
   {
@@ -129,7 +129,7 @@
           "value": "0009-0003-3319-3822",
           "url": "https://orcid.org/0009-0003-3319-3822"
         },
-        "url": "https://jabri-com.vercel.app/ar/",
+        "url": "https://jabri-com.vercel.app/",
         "image": {
           "@type": "ImageObject",
           "url": "https://jabri-com.vercel.app/image/Jabri-photo.png",
@@ -143,7 +143,6 @@
         },
         "email": "mailto:jabri62018@gmail.com",
         "sameAs": [
-          "https://orcid.org/0009-0003-3319-3822",
           "https://github.com/Jabri-web",
           "https://doi.org/10.5281/zenodo.20513840",
           "https://x.com/JabriAbdulla1"
@@ -154,7 +153,7 @@
         "@id": "https://jabri-com.vercel.app/#org",
         "name": "واحة الجبري",
         "alternateName": "Heaven Al-Jabri",
-        "url": "https://jabri-com.vercel.app/ar/",
+        "url": "https://jabri-com.vercel.app/",
         "logo": {
           "@type": "ImageObject",
           "url": "https://jabri-com.vercel.app/image/Jabri-photo.png",
@@ -167,11 +166,23 @@
       {
         "@type": "WebSite",
         "@id": "https://jabri-com.vercel.app/#website",
-        "url": "https://jabri-com.vercel.app/ar/",
+        "url": "https://jabri-com.vercel.app/",
         "name": "واحة الجبري | Heaven Al-Jabri",
         "description": "منصة توثيق التراث اليمني وبوابة السندباد للأبحاث العلمية",
         "publisher": { "@id": "https://jabri-com.vercel.app/#org" },
         "inLanguage": ["ar", "en"]
+      },
+      {
+        "@type": "ScholarlyArticle",
+        "@id": "https://jabri-com.vercel.app/research.html/#article",
+        "name": "نظرية السندباد الموحدة Z+C+A=1",
+        "author": { "@id": "https://jabri-com.vercel.app/#person" },
+        "datePublished": "2026-01-01",
+        "dateModified": "2026-08-07",
+        "url": "https://jabri-com.vercel.app/research.html",
+        "description": "بحث في الرياضيات والفيزياء النظرية يقدم نظرية موحدة تربط بين دالة Zx ومسائل الألفية.",
+        "identifier": "10.5281/zenodo.20513840",
+        "publisher": { "@id": "https://jabri-com.vercel.app/#org" }
       }
     ]
   }
@@ -185,7 +196,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
   
   <!-- ====================================================================== -->
-  <!-- 13. الاستايل (نفس الجذر) -->
+  <!-- 13. الاستايل -->
   <!-- ====================================================================== -->
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -294,16 +305,17 @@
 <div class="btn-container">
   
   <audio id="bgMusic" loop preload="auto" crossorigin="anonymous">
-    <source src="../image/music.mp3" type="audio/mpeg">
+    <source src="image/music.mp3" type="audio/mpeg">
   </audio>
   <button id="musicBtn" class="top-btn music-btn" title="تشغيل / إيقاف الموسيقى">🎵</button>
   
-  <a href="../visitor.html" id="visitorBtn" class="top-btn visitor-btn" title="عدد الزوار">
+  <a href="visitor.html" id="visitorBtn" class="top-btn visitor-btn" title="زوار">
     <span id="visitorText">زوار</span>
     <span id="visitorCount">1</span>
   </a>
   
-  <button id="langBtn" class="top-btn lang-btn" title="تبديل اللغة">🇸🇦 عربي</button>
+  <button id="langBtn" class="top-btn lang-btn" title="تبديل اللغة">🇾🇪
+عربي</button>
   
 </div>
 
@@ -401,13 +413,13 @@
     document.documentElement.lang = newLang;
     document.documentElement.dir = newLang === 'ar' ? 'rtl' : 'ltr';
     localStorage.setItem('preferred-language', newLang);
-    this.textContent = newLang === 'ar' ? '🇸🇦 عربي' : '🇬🇧 English';
+    this.textContent = newLang === 'ar' ? '🇾🇪 عربي ' : '🇬🇧 English';
     if (window.updateCounterLang) window.updateCounterLang();
     console.log('🌍 اللغة: ' + newLang);
   });
 })();
 
-console.log('✅ ar/header.html جاهز - مفهرس بالكامل (index, follow)');
+console.log('✅ header.html جاهز - مفهرس بالكامل (index, follow)');
 </script>
 
 </body>
