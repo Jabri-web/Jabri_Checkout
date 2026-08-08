@@ -1,5 +1,5 @@
 // =============================================
-//  init-page-root.js - تحميل الهيدر والفوتر مع شاشة تحميل
+//  init-page-root.js - تحميل الهيدر والفوتر (نسخة المسارات المطلقة)
 // =============================================
 
 (function() {
@@ -23,10 +23,10 @@
         
         <div class="splash-buttons">
           <audio id="bgMusic" loop preload="auto" crossorigin="anonymous">
-            <source src="image/music.mp3" type="audio/mpeg">
+            <source src="/image/music.mp3" type="audio/mpeg">
           </audio>
           <button id="musicBtn" class="splash-btn splash-music">🎵</button>
-          <a href="visitor.html" id="visitorBtn" class="splash-btn splash-visitor">
+          <a href="/visitor.html" id="visitorBtn" class="splash-btn splash-visitor">
             <span id="visitorText">زوار</span>
             <span id="visitorCount" class="splash-visitor-count">1</span>
           </a>
@@ -41,7 +41,6 @@
     div.innerHTML = splashHTML;
     document.body.prepend(div.firstElementChild);
     
-    // نضيف الـ style
     const style = document.createElement('style');
     style.id = 'splash-style';
     style.textContent = `
@@ -135,20 +134,18 @@
       mainContent.classList.add('visible');
     }
     
-    // ✅ إطلاق حدث splashHidden عشان الهيدر يعرف يتحدّث
     document.dispatchEvent(new CustomEvent('splashHidden'));
     
-    // تنظيف الكاش بعد ثانية
     setTimeout(function() {
       if (splash) { splash.remove(); }
       if (splashStyle) { splashStyle.remove(); }
-      console.log('🧹 تم تنظيف الكاش - إزالة شاشة التحميل والـ style');
+      console.log('🧹 تم تنظيف الكاش');
     }, 1000);
     
     console.log('✅ شاشة التحميل اختفت');
   }
   
-  // ===== تنفيذ السكريبتات (تم تعديلها لحل مشكلة insertBefore) =====
+  // ===== تنفيذ السكريبتات =====
   function executeScripts(container) {
     const scripts = container.querySelectorAll('script');
     scripts.forEach(oldScript => {
@@ -156,7 +153,6 @@
         const src = oldScript.src || '';
         const content = oldScript.textContent || '';
         
-        // نتحقق إذا كان السكربت محمل مسبقاً (لتجنب التكرار)
         if (src) {
           const existing = document.querySelector(`script[src="${src}"]`);
           if (existing) return;
@@ -169,11 +165,9 @@
         } else if (content.trim()) {
           newScript.textContent = content;
         } else {
-          return; // سكربت فارغ
+          return;
         }
         
-        // ✅ الحل الجديد: نضيف السكربت مباشرة إلى الـ container
-        // بدلاً من insertBefore المعقدة التي كانت تسبب أخطاء في nextSibling
         container.appendChild(newScript);
         
       } catch (e) {
@@ -182,7 +176,7 @@
     });
   }
   
-  // ===== تحميل الهيدر =====
+  // ===== تحميل الهيدر (من الجذر) =====
   function loadHeader() {
     const placeholder = document.getElementById('header-placeholder');
     if (!placeholder) {
@@ -197,10 +191,10 @@
       return;
     }
     
-    console.log('📄 جاري تحميل الهيدر...');
-    const basePath = window.location.pathname.includes('/ar/') || window.location.pathname.includes('/en/') ? '../' : '';
+    console.log('📄 جاري تحميل الهيدر من الجذر...');
     
-    fetch((basePath || '') + 'header.html')
+    // ✅ مسار مطلق من الجذر
+    fetch('/header.html')
       .then(response => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return response.text();
@@ -222,16 +216,15 @@
       });
   }
   
-  // ===== تحميل الفوتر =====
+  // ===== تحميل الفوتر (من الجذر) =====
   function loadFooter() {
     const placeholder = document.getElementById('footer-placeholder');
     if (!placeholder) return;
     if (placeholder.dataset.loaded === 'true') return;
     
-    console.log('📄 جاري تحميل الفوتر...');
-    const basePath = window.location.pathname.includes('/ar/') || window.location.pathname.includes('/en/') ? '../' : '';
+    console.log('📄 جاري تحميل الفوتر من الجذر...');
     
-    fetch((basePath || '') + 'footer.html')
+    fetch('/footer.html')
       .then(response => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return response.text();
@@ -255,7 +248,6 @@
     loadHeader();
     loadFooter();
     
-    // في حال تأخر التحميل، نخفي الشاشة بعد 4 ثواني كحد أقصى
     setTimeout(function() {
       if (!splashHidden) {
         console.log('⏰ انتهى الوقت المحدد - إخفاء شاشة التحميل');
@@ -270,5 +262,5 @@
     init();
   }
   
-  console.log('✅ init-page-root.js جاهز مع تنظيف الكاش');
+  console.log('✅ init-page-root.js جاهز (المسارات المطلقة)');
 })();
