@@ -148,26 +148,36 @@
     console.log('✅ شاشة التحميل اختفت');
   }
   
-  // ===== تنفيذ السكريبتات =====
+  // ===== تنفيذ السكريبتات (تم تعديلها لحل مشكلة insertBefore) =====
   function executeScripts(container) {
     const scripts = container.querySelectorAll('script');
     scripts.forEach(oldScript => {
-      const src = oldScript.src || '';
-      const content = oldScript.textContent || '';
-      const existing = document.querySelector(`script[src="${src}"]`);
-      if (src && existing) return;
-      const newScript = document.createElement('script');
-      if (src) {
-        newScript.src = src;
-        newScript.async = false;
-      } else if (content.trim()) {
-        newScript.textContent = content;
-      }
-      const lastScript = document.scripts[document.scripts.length - 1];
-      if (lastScript) {
-        lastScript.parentNode.insertBefore(newScript, lastScript.nextSibling);
-      } else {
-        document.head.appendChild(newScript);
+      try {
+        const src = oldScript.src || '';
+        const content = oldScript.textContent || '';
+        
+        // نتحقق إذا كان السكربت محمل مسبقاً (لتجنب التكرار)
+        if (src) {
+          const existing = document.querySelector(`script[src="${src}"]`);
+          if (existing) return;
+        }
+        
+        const newScript = document.createElement('script');
+        if (src) {
+          newScript.src = src;
+          newScript.async = false;
+        } else if (content.trim()) {
+          newScript.textContent = content;
+        } else {
+          return; // سكربت فارغ
+        }
+        
+        // ✅ الحل الجديد: نضيف السكربت مباشرة إلى الـ container
+        // بدلاً من insertBefore المعقدة التي كانت تسبب أخطاء في nextSibling
+        container.appendChild(newScript);
+        
+      } catch (e) {
+        console.warn('⚠️ فشل تنفيذ سكربت:', e);
       }
     });
   }
