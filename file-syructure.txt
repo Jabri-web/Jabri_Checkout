@@ -1,0 +1,13 @@
+/
+├── Check.html              (نسخة الجذر)
+├── header.html             (ملف الهيدر)
+├── footer.html             (ملف الفوتر)
+├── image/
+│   └── music.mp3
+├── js/
+│   ├── init-page-root.js   (المعدل)
+│   └── init-page-ar.js
+├── ar/
+│   └── Check.html          (نسخة /ar/ - نفس المحتوى)
+└── en/
+    └── Check.html          (نسخة /en/ - نفس المحتوى)
