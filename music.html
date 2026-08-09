@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشغل الموسيقى - واحة الجبري</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(135deg, #0a0a0f, #1a1a2e);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Cairo', Arial, sans-serif;
+            padding: 20px;
+        }
+        .music-card {
+            background: linear-gradient(145deg, #1a1a2e, #252545);
+            border-radius: 30px;
+            padding: 50px 60px;
+            text-align: center;
+            border: 2px solid #6ae3ff;
+            box-shadow: 0 0 60px rgba(106, 227, 255, 0.15);
+            max-width: 500px;
+            width: 100%;
+            transition: 0.3s;
+        }
+        .music-card:hover {
+            box-shadow: 0 0 80px rgba(106, 227, 255, 0.25);
+            transform: translateY(-5px);
+        }
+        .icon-big {
+            font-size: 5rem;
+            margin-bottom: 15px;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        h1 {
+            color: #6ae3ff;
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            color: #8888bb;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+        }
+        .music-player {
+            background: #0a0a0f;
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid #2a2a4e;
+        }
+        .song-title {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        .song-title .artist {
+            color: #8888bb;
+            font-size: 0.85rem;
+            display: block;
+            margin-top: 5px;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .control-btn {
+            background: #1a1a2e;
+            border: 2px solid #2a2a4e;
+            color: #8888bb;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .control-btn:hover {
+            border-color: #6ae3ff;
+            color: #6ae3ff;
+        }
+        .control-btn.play-btn {
+            width: 65px;
+            height: 65px;
+            font-size: 2rem;
+            background: linear-gradient(135deg, #6ae3ff, #3b9fcb);
+            color: #0a0a0f;
+            border: none;
+        }
+        .control-btn.play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(106, 227, 255, 0.3);
+        }
+        .control-btn.play-btn.playing {
+            background: linear-gradient(135deg, #ff6a6a, #cb3b3b);
+        }
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 15px 0 5px;
+        }
+        .progress-bar {
+            flex: 1;
+            height: 4px;
+            background: #2a2a4e;
+            border-radius: 2px;
+            cursor: pointer;
+            position: relative;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #6ae3ff, #3b9fcb);
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.1s;
+        }
+        .time {
+            color: #666;
+            font-size: 0.8rem;
+            min-width: 40px;
+        }
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: center;
+        }
+        .volume-control input[type="range"] {
+            width: 100px;
+            height: 3px;
+            -webkit-appearance: none;
+            background: #2a2a4e;
+            border-radius: 2px;
+            outline: none;
+        }
+        .volume-control input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #6ae3ff;
+            cursor: pointer;
+        }
+        .volume-icon {
+            color: #8888bb;
+            font-size: 1.2rem;
+        }
+        .lang-switch {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+        .lang-btn {
+            background: #0a0a0f;
+            border: 1px solid #2a2a4e;
+            color: #8888bb;
+            padding: 8px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .lang-btn.active {
+            background: #6ae3ff;
+            color: #0a0a0f;
+            border-color: #6ae3ff;
+        }
+        .lang-btn:hover {
+            border-color: #6ae3ff;
+            color: #d0d0ea;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            color: #6ae3ff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            padding: 8px 20px;
+            border: 1px solid #2a2a4e;
+            border-radius: 25px;
+        }
+        .back-btn:hover {
+            border-color: #6ae3ff;
+            background: #1a1a2e;
+        }
+        .status-text {
+            color: #666;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+        @media (max-width: 500px) {
+            .music-card { padding: 30px 20px; }
+            .controls { gap: 12px; }
+            .control-btn { width: 45px; height: 45px; font-size: 1.2rem; }
+            .control-btn.play-btn { width: 55px; height: 55px; font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="music-card">
+        <div class="icon-big">🎵</div>
+        <h1 id="title" data-ar="مشغل الموسيقى" data-en="Music Player">مشغل الموسيقى</h1>
+        <p class="subtitle" id="subtitle" data-ar="أجواء واحة الجبري" data-en="Heaven Al-Jabri Vibes">أجواء واحة الجبري</p>
+        
+        <div class="music-player">
+            <div class="song-title">
+                <span id="songName" data-ar="نغمات اليمن" data-en="Melodies of Yemen">نغمات اليمن</span>
+                <span class="artist" id="artistName" data-ar="م/ عبدالله الجبري" data-en="Eng. Abdulla Al-Jabri">م/ عبدالله الجبري</span>
+            </div>
+            
+            <div class="controls">
+                <button class="control-btn" id="prevBtn" onclick="prevTrack()" title="السابق">⏮</button>
+                <button class="control-btn play-btn" id="playBtn" onclick="togglePlay()">▶</button>
+                <button class="control-btn" id="nextBtn" onclick="nextTrack()" title="التالي">⏭</button>
+            </div>
+            
+            <div class="progress-container">
+                <span class="time" id="currentTime">0:00</span>
+                <div class="progress-bar" id="progressBar" onclick="seek(event)">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span class="time" id="totalTime">0:00</span>
+            </div>
+            
+            <div class="volume-control">
+                <span class="volume-icon">🔊</span>
+                <input type="range" id="volumeSlider" min="0" max="100" value="40" oninput="setVolume(this.value)">
+            </div>
+            
+            <div class="status-text" id="statusText" data-ar="⏸ متوقف" data-en="⏸ Paused">⏸ متوقف</div>
+        </div>
+        
+        <div class="lang-switch">
+            <button class="lang-btn active" data-lang="ar" onclick="setLanguage('ar')">🇾🇪 عربي</button>
+            <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">🇬🇧 English</button>
+        </div>
+        
+        <a href="/" class="back-btn">🏠 العودة للرئيسية</a>
+    </div>
+
+    <script>
+        // =============================================
+        //  مشغل الموسيقى المتطور
+        // =============================================
+        
+        // ------ إعدادات ------
+        const MUSIC_FILES = [
+            { src: 'Image/music.mp3', name_ar: 'نغمات اليمن', name_en: 'Melodies of Yemen' },
+            { src: 'Image/music2.mp3', name_ar: 'ألوان صنعاء', name_en: 'Colors of Sana\'a' },
+            { src: 'Image/music3.mp3', name_ar: 'سحر سقطرى', name_en: 'Socotra Magic' }
+        ];
+        
+        let currentTrack = 0;
+        let currentLang = localStorage.getItem('music_lang') || 'ar';
+        
+        // ------ عناصر الصوت ------
+        const audio = new Audio();
+        audio.volume = 0.4;
+        audio.loop = false;
+        
+        // ------ عناصر DOM ------
+        const playBtn = document.getElementById('playBtn');
+        const progressFill = document.getElementById('progressFill');
+        const currentTimeEl = document.getElementById('currentTime');
+        const totalTimeEl = document.getElementById('totalTime');
+        const progressBar = document.getElementById('progressBar');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const statusText = document.getElementById('statusText');
+        const songName = document.getElementById('songName');
+        const artistName = document.getElementById('artistName');
+        
+        // ------ تحميل الأغنية ------
+        function loadTrack(index) {
+            const track = MUSIC_FILES[index];
+            if (!track) return;
+            audio.src = track.src;
+            audio.load();
+            updateSongInfo();
+            if (audio.paused) {
+                playBtn.textContent = '▶';
+                statusText.textContent = currentLang === 'en' ? '⏸ Paused' : '⏸ متوقف';
+            }
+        }
+        
+        // ------ تحديث معلومات الأغنية ------
+        function updateSongInfo() {
+            const track = MUSIC_FILES[currentTrack];
+            if (!track) return;
+            const isEn = currentLang === 'en';
+            songName.textContent = isEn ? track.name_en : track.name_ar;
+            artistName.textContent = isEn ? 'Eng. Abdulla Al-Jabri' : 'م/ عبدالله الجبري';
+        }
+        
+        // ------ تشغيل/إيقاف ------
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    playBtn.textContent = '⏸';
+                    statusText.textContent = currentLang === 'en' ? '▶ Playing' : '▶ تشغيل';
+                }).catch(err => {
+                    console.log('⚠️ لم يتم تشغيل الموسيقى:', err);
+                    statusText.textContent = '⚠️ ' + (currentLang === 'en' ? 'Please tap to play' : 'الرجاء النقر للتشغيل');
+                });
+            } else {
+                audio.pause();
+                playBtn.textContent = '▶';
+                statusText.textContent = currentLang === 'en' ? '⏸ Paused' : '⏸ متوقف';
+            }
+        }
+        
+        // ------ الأغنية التالية ------
+        function nextTrack() {
+            currentTrack = (currentTrack + 1) % MUSIC_FILES.length;
+            loadTrack(currentTrack);
+            if (!audio.paused) {
+                audio.play().catch(() => {});
+            }
+        }
+        
+        // ------ الأغنية السابقة ------
+        function prevTrack() {
+            currentTrack = (currentTrack - 1 + MUSIC_FILES.length) % MUSIC_FILES.length;
+            loadTrack(currentTrack);
+            if (!audio.paused) {
+                audio.play().catch(() => {});
+            }
+        }
+        
+        // ------ تحديث شريط التقدم ------
+        function updateProgress() {
+            if (audio.duration) {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                progressFill.style.width = percent + '%';
+                currentTimeEl.textContent = formatTime(audio.currentTime);
+                totalTimeEl.textContent = formatTime(audio.duration);
+            }
+        }
+        
+        // ------ تنسيق الوقت ------
+        function formatTime(seconds) {
+            if (isNaN(seconds) || !isFinite(seconds)) return '0:00';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return mins + ':' + String(secs).padStart(2, '0');
+        }
+        
+        // ------ النقر على شريط التقدم ------
+        function seek(e) {
+            const rect = progressBar.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            if (audio.duration) {
+                audio.currentTime = percent * audio.duration;
+            }
+        }
+        
+        // ------ ضبط مستوى الصوت ------
+        function setVolume(value) {
+            audio.volume = value / 100;
+        }
+        
+        // ------ أحداث الصوت ------
+        audio.addEventListener('timeupdate', updateProgress);
+        audio.addEventListener('loadedmetadata', updateProgress);
+        audio.addEventListener('ended', nextTrack);
+        
+        // ------ تحديث اللغة ------
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('music_lang', lang);
+            
+            // تحديث النصوص
+            document.querySelectorAll('[data-ar][data-en]').forEach(el => {
+                el.textContent = lang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-ar');
+            });
+            
+            // تحديث عنوان الصفحة
+            document.title = lang === 'en' ? 'Music Player - Al-Jabri Oasis' : 'مشغل الموسيقى - واحة الجبري';
+            
+            // تحديث معلومات الأغنية
+            updateSongInfo();
+            
+            // تحديث حالة التشغيل
+            const isPlaying = !audio.paused;
+            statusText.textContent = isPlaying ?
+                (lang === 'en' ? '▶ Playing' : '▶ تشغيل') :
+                (lang === 'en' ? '⏸ Paused' : '⏸ متوقف');
+            
+            // تحديث الأزرار
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            
+            // اتجاه الصفحة
+            document.documentElement.dir = lang === 'en' ? 'ltr' : 'rtl';
+            document.documentElement.lang = lang;
+        }
+        
+        // ------ تشغيل أول أغنية ------
+        loadTrack(0);
+        
+        // ------ جعل الدوال عالمية ------
+        window.togglePlay = togglePlay;
+        window.nextTrack = nextTrack;
+        window.prevTrack = prevTrack;
+        window.seek = seek;
+        window.setVolume = setVolume;
+        window.setLanguage = setLanguage;
+        
+        // ------ تشغيل عند التحميل ------
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('music_lang') || 'ar';
+            setLanguage(savedLang);
+        });
+        
+        // ------ تشغيل تلقائي عند أول تفاعل ------
+        document.addEventListener('click', function firstTap() {
+            if (audio.paused) {
+                audio.play().catch(() => {});
+            }
+            document.removeEventListener('click', firstTap);
+        }, { once: true });
+    </script>
+
+</body>
+</html>
