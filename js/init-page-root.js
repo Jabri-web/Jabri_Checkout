@@ -1,14 +1,14 @@
-
 // ================================================================
-//  init-page-root.js - الإصدار النهائي (الدرع المطلق)
+//  init-page-root.js - الإصدار النهائي (الدرع المطلق + 404)
 // ================================================================
 
 (function() {
   'use strict';
-  console.log('🛡️ [init] تفعيل الدرع المطلق (v3.1.0)...');
+  console.log('🛡️ [init] تفعيل الدرع المطلق (v4.0.0)...');
 
   let splashHidden = false;
 
+  // ===== شاشة الترحيب =====
   function createSplash() {
     if (document.getElementById('splashScreen')) return;
     const html = `
@@ -179,14 +179,93 @@
     console.log('🔗 Canonical مضبوط على: ' + currentUrl);
   }
 
+  // ================================================================
+  //  🚨 كاشف 404 التلقائي + معالجته
+  // ================================================================
+
+  function detect404AndHandle() {
+    // 1) كشف عبر العنوان أو المحتوى
+    const is404 = document.title.includes('404') || document.body.innerHTML.includes('404');
+
+    // 2) كشف عبر أداء الصفحة (performance)
+    let status404 = false;
+    if (window.performance && window.performance.getEntries) {
+      const entries = window.performance.getEntries();
+      for (let entry of entries) {
+        if (entry.name === window.location.href && entry.responseStatus === 404) {
+          status404 = true;
+          break;
+        }
+      }
+    }
+
+    if (is404 || status404) {
+      console.warn('🚨 [404] تم كشف خطأ 404');
+      handle404Error();
+    }
+  }
+
+  function handle404Error() {
+    // منع التكرار
+    if (sessionStorage.getItem('jabri404Handled')) return;
+    sessionStorage.setItem('jabri404Handled', 'true');
+
+    // إخفاء السبلاش لو ظاهر
+    hideSplash();
+
+    // تشغيل موسيقى
+    try {
+      const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+      audio.volume = 0.15;
+      audio.loop = true;
+      audio.play().catch(() => {});
+    } catch(e) {}
+
+    // جلب عدد الزوار من localStorage
+    let count = localStorage.getItem('jabriVisitorCount');
+    if (count === null) count = Math.floor(Math.random() * 80) + 20;
+    else count = Number(count);
+
+    // عرض رسالة خطأ فوق كل شيء
+    const div = document.createElement('div');
+    div.id = 'jabri-404-overlay';
+    div.style.cssText = `
+      position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+      background: #0b1a2e; color: #f0e6d3; padding: 20px 30px;
+      border-radius: 40px; border: 1px solid #b48b5a;
+      font-size: 20px; z-index: 999999;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+      text-align: center; font-family: 'Cairo', sans-serif;
+      backdrop-filter: blur(12px); direction: rtl;
+      max-width: 90%;
+    `;
+    div.innerHTML = `
+      🏝️ عذرًا، هذا الدرب غير موجود في واحة الجبري.<br>
+      🌊 سيتم تحويلك إلى <strong>الواحة الرئيسية</strong> بعد 7 ثوانٍ<br>
+      👥 عدد الزوار: <strong>${count}</strong>
+      <div style="margin-top:12px; font-size:14px; color:#bbaa88;">🎵 نغمات السندباد تعزف لك...</div>
+    `;
+    document.body.prepend(div);
+
+    // التوجيه إلى الواحة بعد 7 ثوانٍ
+    setTimeout(() => {
+      window.location.href = '/';
+    }, 7000);
+  }
+
+  // ===== دالة init الرئيسية =====
   function init() {
     createSplash();
+    detect404AndHandle();   // كشف 404 فوراً
     loadHeader();
     loadFooter();
+
     document.addEventListener('headerLoaded', function() {
       setDynamicCanonical();
       addDynamicLinks();
     });
+
+    // مهلة أمان لإخفاء السبلاش
     setTimeout(function() {
       if (!splashHidden) {
         console.warn('⏰ انتهاء المهلة، إخفاء الشاشة قسراً');
@@ -195,10 +274,12 @@
     }, 5000);
   }
 
+  // ===== تشغيل =====
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
-  console.log('✅ init-page-root.js جاهز (النسخة النهائية)');
+
+  console.log('✅ init-page-root.js جاهز (النسخة النهائية مع 404)');
 })();
