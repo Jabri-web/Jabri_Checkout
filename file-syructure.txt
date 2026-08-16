@@ -1,13 +1,19 @@
 /
-├── Check.html              (نسخة الجذر)
-├── header.html             (ملف الهيدر)
-├── footer.html             (ملف الفوتر)
+├── Check.html              # الصفحة الرئيسية (الجذر)
+├── header.html             # الهيدر الموحد
+├── footer.html             # الفوتر الموحد
+├── theory-ar.html          # النسخة العربية - الدالة الأم
+├── theory-en.html          # النسخة الإنجليزية - Mother Function
 ├── image/
-│   └── music.mp3
+│   └── music.mp3           # الملف الصوتي
 ├── js/
-│   ├── init-page-root.js   (المعدل)
-│   └── init-page-ar.js
+│   ├── init-page-root.js   # تهيئة الجذر
+│   ├── init-page-ar.js     # تهيئة العربية
+│   ├── init-page-en.js     # تهيئة الإنجليزية (جديد)
+│   └── menu.js             # القائمة الذكية (جديد)
 ├── ar/
-│   └── Check.html          (نسخة /ar/ - نفس المحتوى)
+│   ├── Check.html          # نسخة /ar/ من الرئيسية
+│   └── theory-ar.html      # النسخة العربية (مكرر للتنظيم)
 └── en/
-    └── Check.html          (نسخة /en/ - نفس المحتوى)
+    ├── Check.html          # نسخة /en/ من الرئيسية
+    └── theory-en.html      # النسخة الإنجليزية (مكرر للتنظيم)
