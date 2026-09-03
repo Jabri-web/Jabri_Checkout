@@ -10,26 +10,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     
-    <title>واحة الجبري - البوابة الرئيسية</title>
-    <meta name="description" content="بوابة واحة الجبري - تراث اليمن العريق" />
+    <title>📦 نظام فحص الواحة - repo9</title>
+    <meta name="description" content="نظام فحص واحة الجبري - اختبار الروابط، السرعة، 404، والأداء الشامل" />
     <meta name="author" content="م/ عبدالله محمد ناصر الجبري" />
+    <meta name="google-site-verification" content="SN_zKidXbtB2FBxIPwlPgV-L24kJR2eHE9SQRIE76U" />
     
-    <link rel="canonical" href="https://jabri-com.vercel.app/" />
+    <link rel="canonical" href="https://jabri-com.vercel.app/Checkout.html" />
+    <link rel="alternate" hreflang="ar" href="https://jabri-com.vercel.app/Checkout.html" />
+    <link rel="alternate" hreflang="en" href="https://jabri-com.vercel.app/en/Checkout.html" />
     
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="واحة الجبري" />
-    <meta property="og:title" content="واحة الجبري - البوابة الرئيسية" />
-    <meta property="og:description" content="بوابة واحة الجبري - تراث اليمن العريق" />
+    <meta property="og:site_name" content="واحة الجبري | نظام الفحص" />
+    <meta property="og:title" content="نظام فحص الواحة - Jabri Checkout" />
+    <meta property="og:description" content="فحص شامل للروابط، السرعة، 404، وأداء واحة الجبري" />
     <meta property="og:image" content="https://jabri-com.vercel.app/image/Jabri-photo.webp" />
-    <meta property="og:url" content="https://jabri-com.vercel.app/" />
+    <meta property="og:url" content="https://jabri-com.vercel.app/Checkout.html" />
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* ===== إجبار العرض على Desktop ===== */
         html {
             min-width: 1200px;
             overflow-x: auto;
@@ -38,494 +36,148 @@
         body {
             min-width: 1200px;
             overflow-x: auto;
-            background: #0a0f0d;
-            color: #f5efe6;
+            background: #0a0a0f;
+            color: #e8e8f0;
             font-family: 'Cairo', 'Tajawal', sans-serif;
-            transition: 0.4s ease;
-            min-height: 100vh;
             padding: 20px;
             line-height: 1.8;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        body.day {
-            background: #f5efe6;
-            color: #1a1a1a;
-        }
-
-        body.day .top-bar { background: rgba(245, 239, 230, 0.95); border-bottom: 2px solid rgba(201, 168, 76, 0.3); }
-        body.day .top-bar .brand .name { color: #8a6d2b; }
-        body.day .top-bar .brand .name small { color: #8a7a6a; }
-        body.day .top-actions a { color: #333; }
-        body.day .hero-section { background: rgba(255, 255, 255, 0.15); }
-        body.day .hero-title { color: #1a1a1a; }
-        body.day .hero-sub { color: #8a6d2b; }
-        body.day .hero-philosophy { background: rgba(255, 255, 255, 0.7); border-right-color: #c9a84c; }
-        body.day .hero-philosophy p { color: #333; }
-        body.day .hero-mission { background: rgba(255, 255, 255, 0.5); color: #333; }
-        body.day .brand-card { background: rgba(255, 255, 255, 0.85); border-color: rgba(201, 168, 76, 0.15); }
-        body.day .brand-card .card-name { color: #1a1a1a; }
-        body.day .brand-card:hover { border-color: rgba(201, 168, 76, 0.5); }
-        body.day .bottom-bar { background: rgba(245, 239, 230, 0.92); border-color: rgba(201, 168, 76, 0.2); }
-        body.day .bottom-bar .btn-b { color: #444; }
-        body.day .bottom-bar .btn-b.active { background: #c9a84c; color: #fff; }
-        body.day .video-timer { background: rgba(245, 239, 230, 0.85); color: #8a6d2b; }
-        body.day .sound-btn { background: rgba(245, 239, 230, 0.85); color: #8a6d2b; }
-        body.day .sound-btn:hover { background: #c9a84c; color: #fff; }
-        body.day .hero-badge { background: rgba(201, 168, 76, 0.12); border-color: rgba(201, 168, 76, 0.25); }
-        body.day .settings-box { background: #f5efe6; color: #1a1a1a; }
-        body.day .login-modal .modal-content { background: #f5efe6; color: #1a1a1a; }
-        body.day .login-modal .modal-content input { background: #fff; color: #1a1a1a; border-color: #ccc; }
-        body.day .login-modal .modal-content .close-modal { color: #333; }
-
-        body.night {
-            background: #0a0f0d;
-            color: #f5efe6;
-        }
-
-        body.night .top-bar { background: rgba(10, 15, 13, 0.95); border-bottom: 2px solid rgba(201, 168, 76, 0.25); }
-        body.night .top-bar .brand .name { color: #c9a84c; }
-        body.night .top-bar .brand .name small { color: #b8a07c; }
-        body.night .top-actions a { color: #eee; }
-        body.night .hero-section { background: rgba(0, 0, 0, 0.2); }
-        body.night .hero-title { color: #f5efe6; }
-        body.night .hero-sub { color: #c9a84c; }
-        body.night .hero-philosophy { background: rgba(10, 15, 13, 0.6); border-right-color: #c9a84c; }
-        body.night .hero-philosophy p { color: #ddd; }
-        body.night .hero-mission { background: rgba(0, 0, 0, 0.3); color: #ddd; }
-        body.night .brand-card { background: rgba(10, 15, 13, 0.8); border-color: rgba(201, 168, 76, 0.1); }
-        body.night .brand-card .card-name { color: #f5efe6; }
-        body.night .brand-card:hover { border-color: rgba(201, 168, 76, 0.3); }
-        body.night .bottom-bar { background: rgba(10, 15, 13, 0.92); border-color: rgba(201, 168, 76, 0.12); }
-        body.night .bottom-bar .btn-b { color: #ccc; }
-        body.night .bottom-bar .btn-b.active { background: #c9a84c; color: #0a0f0d; }
-        body.night .video-timer { background: rgba(0, 0, 0, 0.7); color: #c9a84c; }
-        body.night .sound-btn { background: rgba(0, 0, 0, 0.7); color: #c9a84c; }
-        body.night .sound-btn:hover { background: #c9a84c; color: #0a0f0d; }
-        body.night .hero-badge { background: rgba(201, 168, 76, 0.08); border-color: rgba(201, 168, 76, 0.15); }
-        body.night .settings-box { background: #1a1a1a; color: #f5efe6; }
-        body.night .login-modal .modal-content { background: #1a1a1a; color: #f5efe6; }
-        body.night .login-modal .modal-content input { background: #0a0f0d; color: #f5efe6; border-color: #333; }
-        body.night .login-modal .modal-content .close-modal { color: #f5efe6; }
-
+        /* ===== وضع Phone (يُفعّل من الإعدادات) ===== */
         body.device-phone {
             min-width: unset;
             overflow-x: hidden;
         }
 
-        body.device-phone .main-content { min-width: unset; }
-        body.device-phone .brand-grid { grid-template-columns: 1fr 1fr; }
-        body.device-phone .bottom-bar { min-width: unset; width: 96%; }
-        body.device-phone .hero-title { font-size: 36px; }
-        body.device-phone .hero-sub { font-size: 15px; }
-        body.device-phone .hero-formula { font-size: 20px; padding: 6px 14px; }
-        body.device-phone .hero-formula .v { font-size: 24px; }
-        body.device-phone .hero-formula .r { font-size: 30px; }
-        body.device-phone .login-modal .modal-content { width: 95%; padding: 25px; }
-        body.device-phone .top-actions a { font-size: 10px; padding: 4px 8px; }
-
-        .bg-video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            object-fit: cover;
-            opacity: 0.3;
+        body.device-phone .container {
+            max-width: 100%;
+            padding: 0 10px;
         }
 
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 30px;
-            backdrop-filter: blur(14px);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            flex-wrap: wrap;
-            gap: 8px;
+        body.device-phone .grid-2 {
+            grid-template-columns: 1fr;
         }
 
-        .top-bar .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        body.device-phone .header h1 {
+            font-size: 1.8rem;
         }
 
-        .top-bar .brand .icon {
-            width: 42px;
-            height: 42px;
-            background: linear-gradient(135deg, #c9a84c, #e8c96e);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: #0a0f0d;
+        body.device-phone .repo9-grid {
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
         }
 
-        .top-bar .brand .name {
-            font-size: 20px;
-            font-weight: 900;
+        body.device-phone .bottom-bar {
+            min-width: unset;
+            width: 96%;
         }
 
-        .top-bar .brand .name small {
-            display: block;
-            font-size: 10px;
-            font-weight: 300;
-            letter-spacing: 2px;
+        /* ===== منع تصغير الشاشة ===== */
+        @media (max-width: 1199px) {
+            html, body {
+                min-width: 1200px;
+                overflow-x: auto;
+            }
         }
 
-        .top-actions {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-wrap: wrap;
+        /* ===== تصحيح للجوال مع إجبار Desktop ===== */
+        @media (max-width: 820px) {
+            html, body {
+                min-width: 1200px;
+                overflow-x: auto;
+            }
+            .container {
+                padding: 0 20px;
+            }
+            .grid-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+            .repo9-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            .lang-btn {
+                top: 15px;
+                left: 15px;
+            }
+            .music-btn-fixed {
+                top: 15px;
+                right: 15px;
+            }
+            #visitorCounter {
+                top: 15px;
+                font-size: 14px;
+                padding: 6px 16px;
+            }
         }
 
-        .top-actions a {
-            text-decoration: none;
-            padding: 5px 12px;
-            border-radius: 25px;
-            font-size: 12px;
-            transition: 0.3s;
-            border: 1px solid transparent;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            background: rgba(255, 255, 255, 0.04);
-            cursor: pointer;
-        }
+        body.en { direction: ltr; font-family: 'Segoe UI', Arial, sans-serif; }
+        .lang-btn { position: fixed; top: 15px; left: 20px; background: #6ae3ff; border: none; color: #0a0a0f; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 700; z-index: 999; display: flex; align-items: center; gap: 8px; }
+        body.en .lang-btn { left: auto; right: 20px; }
+        #visitorCounter { position: fixed; top: 15px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #1a1a2e, #2a2a3e); color: #6ae3ff; padding: 8px 20px; border-radius: 50px; font-size: 16px; font-weight: bold; z-index: 9999; border: 1px solid #6ae3ff; display: flex; gap: 8px; align-items: center; }
+        .music-btn-fixed { position: fixed; top: 15px; right: 20px; z-index: 99999; background: linear-gradient(135deg, #6ae3ff, #3b9fcb); border: none; color: #0a0a0f; width: 50px; height: 50px; border-radius: 50%; font-size: 24px; cursor: pointer; box-shadow: 0 0 20px rgba(106, 227, 255, 0.4); transition: 0.3s; display: flex; align-items: center; justify-content: center; }
+        body.en .music-btn-fixed { right: auto; left: 20px; }
+        .music-btn-fixed:hover { transform: scale(1.1); box-shadow: 0 0 30px rgba(106, 227, 255, 0.7); }
+        .music-btn-fixed.playing { background: linear-gradient(135deg, #ff6a6a, #cb3b3b); color: #fff; animation: pulse-red 1.5s infinite; }
+        @keyframes pulse-red { 0% { box-shadow: 0 0 0 0 rgba(255, 106, 106, 0.5); } 70% { box-shadow: 0 0 0 15px rgba(255, 106, 106, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 106, 106, 0); } }
+        @media (max-width: 600px) { .music-btn-fixed { width: 42px; height: 42px; font-size: 20px; top: 75px; right: 10px; } body.en .music-btn-fixed { right: auto; left: 10px; } .lang-btn { top: 10px; left: 10px; padding: 6px 12px; font-size: 13px; } #visitorCounter { font-size: 13px; padding: 5px 14px; top: 10px; } }
+        .container { max-width: 1200px; margin: 80px auto 0; flex: 1; width: 100%; }
+        .header { text-align: center; padding: 40px 20px; background: linear-gradient(135deg, #0a3d62, #1e6f9f); border-radius: 16px; margin-bottom: 30px; border: 2px solid #6ae3ff; }
+        .header h1 { font-size: 2.5rem; color: #fff; } .header h1 i { color: #ffd700; margin: 0 10px; }
+        .header .subtitle { font-size: 1.3rem; font-weight: 700; color: #6ae3ff; margin: 8px 0; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin: 30px 0; }
+        @media (max-width: 800px) { .grid-2 { grid-template-columns: 1fr; } }
+        .card { background: #1a1a2e; border: 2px solid #2a2a3e; border-radius: 16px; padding: 25px; transition: 0.3s; }
+        .card:hover { border-color: #6ae3ff; }
+        .card h2 { color: #6ae3ff; font-size: 1.5rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .card h2 i { color: #ffd700; }
+        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-top: 15px; }
+        .links-grid a { background: #0a0a0f; color: #6ae3ff; text-decoration: none; padding: 10px 14px; border-radius: 8px; border: 1px solid #2a2a3e; text-align: center; transition: 0.3s; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .links-grid a:hover { border-color: #6ae3ff; background: #6ae3ff; color: #0a0a0f; }
+        .result-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.9rem; }
+        .result-table th { background: #2a2a3e; color: #6ae3ff; padding: 10px 15px; text-align: center; border: 1px solid #3a3a4e; }
+        .result-table td { padding: 10px 15px; border: 1px solid #2a2a3e; text-align: center; }
+        .result-table .pass { color: #00ff88; } .result-table .fail { color: #ff4444; } .result-table .warn { color: #ffd700; }
+        .run-btn { background: linear-gradient(135deg, #ffd700, #f0a500); color: #0a0a0f; border: none; padding: 14px 40px; border-radius: 40px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: 0.3s; margin: 15px 0; display: inline-flex; align-items: center; gap: 12px; }
+        .run-btn:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 215, 0, 0.4); }
+        .run-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .run-btn.speed { background: linear-gradient(135deg, #6ae3ff, #3b9fcb); }
+        .run-btn.error { background: linear-gradient(135deg, #ff6a6a, #cb3b3b); }
+        .run-btn.structure { background: linear-gradient(135deg, #00ff88, #009966); }
+        .run-btn.clear { background: #2a2a3e; color: #94a3b8; }
+        #footer-placeholder { margin-top: 40px; }
+        .ar, .en { display: inline; } body.en .ar { display: none; } body:not(.en) .en { display: none; }
+        #errorBox { background: #2a0000; border: 2px solid #ff4444; color: #ffaaaa; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: left; direction: ltr; font-family: monospace; display: none; }
+        .progress-bar { width: 100%; height: 6px; background: #1a1a2e; border-radius: 4px; margin: 10px 0; overflow: hidden; }
+        .progress-bar .fill { height: 100%; background: linear-gradient(90deg, #6ae3ff, #ffd700); width: 0%; transition: width 0.3s; border-radius: 4px; }
+        .log-box { background: #0a0a0f; border: 1px solid #2a2a3e; border-radius: 8px; padding: 15px; max-height: 200px; overflow-y: auto; font-family: monospace; font-size: 0.85rem; color: #94a3b8; margin-top: 10px; direction: ltr; text-align: left; }
+        .log-box .log-ok { color: #00ff88; } .log-box .log-fail { color: #ff4444; } .log-box .log-warn { color: #ffd700; } .log-box .log-info { color: #6ae3ff; }
+        .repo9-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 15px 0; }
+        .repo9-card { background: #0a0a0f; border: 1px solid #2a2a3e; border-radius: 12px; padding: 15px 10px; text-decoration: none; color: #e8e8f0; transition: 0.3s; display: block; }
+        .repo9-card:hover { border-color: #6ae3ff; transform: translateY(-4px); }
+        .repo9-card i { font-size: 2rem; display: block; margin-bottom: 6px; }
+        .repo9-card .title { font-weight: bold; font-size: 0.85rem; }
+        .repo9-card .desc { color: #94a3b8; font-size: 0.7rem; }
+        .icon-yellow { color: #ffd700; } .icon-purple { color: #a855f7; } .icon-blue { color: #6ae3ff; } .icon-green { color: #00ff88; } .icon-orange { color: #ff8800; } .icon-red { color: #ff4444; }
+        .badge { display: inline-block; background: #00ff8820; color: #00ff88; padding: 4px 16px; border-radius: 40px; font-size: 0.75rem; border: 1px solid #00ff8840; margin-bottom: 15px; }
+        
+        .diagnose-btn { background: linear-gradient(135deg, #a855f7, #7c3aed); color: #fff; border: none; padding: 14px 40px; border-radius: 40px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: 0.3s; margin: 15px 0; display: inline-flex; align-items: center; gap: 12px; }
+        .diagnose-btn:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(168, 85, 247, 0.4); }
+        .diagnose-btn i { color: #ffd700; }
+        
+        .explore-btn { background: linear-gradient(135deg, #ff6a6a, #cb3b3b); color: #fff; border: none; padding: 14px 40px; border-radius: 40px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: 0.3s; margin: 15px 0; display: inline-flex; align-items: center; gap: 12px; }
+        .explore-btn:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 106, 106, 0.4); }
+        .explore-btn i { color: #ffd700; }
 
-        .top-actions a:hover {
-            background: #c9a84c;
-            color: #0a0f0d !important;
-            transform: scale(1.05);
-        }
-
-        .top-actions .btn-login {
-            border: 1px solid #6ae3ff;
-            color: #6ae3ff;
-        }
-        .top-actions .btn-login:hover {
-            background: #6ae3ff;
-            color: #0a0f0d !important;
-        }
-
-        .top-actions .btn-exit {
-            color: #ff6b6b;
-            border: 1px solid #ff6b6b;
-        }
-        .top-actions .btn-exit:hover {
-            background: #ff6b6b;
-            color: #0a0f0d !important;
-        }
-
-        .top-actions .btn-lang {
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            color: #ffd700;
-        }
-        .top-actions .btn-lang:hover {
-            background: #ffd700;
-            color: #0a0f0d !important;
-        }
-
-        .top-actions .btn-settings {
-            border: 1px solid rgba(201, 168, 76, 0.2);
-            color: #c9a84c;
-        }
-        .top-actions .btn-settings:hover {
-            background: #c9a84c;
-            color: #0a0f0d !important;
-        }
-
-        .main-content {
-            position: relative;
-            z-index: 10;
-            padding-top: 76px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .hero-section {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 30px 20px 20px;
-            min-height: 55vh;
-            width: 100%;
-            max-width: 1024px;
-            backdrop-filter: blur(3px);
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 5px 18px;
-            border-radius: 50px;
-            font-size: 11px;
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
-        .hero-title {
-            font-size: 52px;
-            font-weight: 900;
-            text-shadow: 0 0 50px rgba(201, 168, 76, 0.15);
-            line-height: 1.1;
-        }
-
-        .hero-title span {
-            color: #c9a84c;
-        }
-
-        .hero-sub {
-            font-size: 18px;
-            font-weight: 300;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            margin: 6px 0 18px;
-        }
-
-        .hero-philosophy {
-            max-width: 500px;
-            margin: 8px auto;
-            padding: 10px 20px;
-            border-radius: 12px;
-            border-right: 3px solid #c9a84c;
-        }
-
-        .hero-philosophy p {
-            font-size: 14px;
-            padding: 2px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .hero-philosophy p i {
-            color: #c9a84c;
-        }
-
-        .hero-formula {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            padding: 8px 20px;
-            background: rgba(201, 168, 76, 0.05);
-            border: 1px solid rgba(201, 168, 76, 0.1);
-            border-radius: 12px;
-            font-size: 26px;
-            font-weight: bold;
-            font-family: 'Times New Roman', serif;
-            margin: 15px 0 18px;
-        }
-
-        .hero-formula .b { color: #c9a84c; opacity: 0.5; }
-        .hero-formula .v { font-size: 30px; }
-        .hero-formula .v:nth-child(2) { color: #c9a84c; }
-        .hero-formula .v:nth-child(4) { color: #2d8f5c; }
-        .hero-formula .v:nth-child(6) { color: #e8c96e; }
-        .hero-formula .p { color: #666; font-size: 24px; }
-        .hero-formula .e { color: #666; font-size: 26px; }
-        .hero-formula .r { color: #c9a84c; font-size: 36px; animation: glow 2s ease-in-out infinite; }
-
-        @keyframes glow {
-            0%, 100% { text-shadow: 0 0 30px rgba(201, 168, 76, 0.2); transform: scale(1); }
-            50% { text-shadow: 0 0 60px rgba(201, 168, 76, 0.5); transform: scale(1.05); }
-        }
-
-        .hero-mission {
-            font-size: 15px;
-            padding: 8px 16px;
-            border-radius: 30px;
-        }
-
-        .hero-mission i {
-            color: #c9a84c;
-            margin: 0 5px;
-        }
-
-        .hero-mission .emoji {
-            display: inline-block;
-            margin: 0 4px;
-        }
-
-        .brand-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            max-width: 1024px;
-            margin: 10px auto 20px;
-            padding: 0 15px;
-            width: 100%;
-        }
-
-        .brand-card {
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(201, 168, 76, 0.1);
-            border-radius: 16px;
-            padding: 18px 15px;
-            text-align: center;
-            transition: 0.4s;
-            cursor: pointer;
-        }
-
-        .brand-card:hover {
-            border-color: rgba(201, 168, 76, 0.3);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 40px rgba(201, 168, 76, 0.05);
-        }
-
-        .brand-card .card-icon {
-            font-size: 28px;
-            color: #c9a84c;
-            margin-bottom: 6px;
-        }
-
-        .brand-card .card-name {
-            font-size: 16px;
-            font-weight: 700;
-        }
-
-        .brand-card .card-sub {
-            font-size: 11px;
-            color: #b8a07c;
-            letter-spacing: 2px;
-        }
-
-        .brand-card .card-formula {
-            font-size: 14px;
-            color: #c9a84c;
-            font-family: 'Times New Roman', serif;
-            margin-top: 4px;
-            opacity: 0.6;
-        }
-
-        .brand-card:nth-child(2) .card-icon { color: #2d8f5c; }
-        .brand-card:nth-child(3) .card-icon { color: #e8c96e; }
-        .brand-card:nth-child(4) .card-icon { color: #ffd700; }
-
-        .bottom-bar {
-            position: fixed;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 50;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            backdrop-filter: blur(12px);
-            padding: 6px 16px;
-            border-radius: 50px;
-            border: 1px solid rgba(201, 168, 76, 0.12);
-            flex-wrap: wrap;
-            justify-content: center;
-            min-width: 500px;
-        }
-
-        .bottom-bar .btn-b {
-            padding: 5px 14px;
-            border-radius: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            background: rgba(255, 255, 255, 0.03);
-            font-size: 11px;
-            cursor: pointer;
-            transition: 0.3s;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .bottom-bar .btn-b:hover {
-            background: #c9a84c;
-            color: #0a0f0d !important;
-            border-color: #c9a84c;
-        }
-
-        .bottom-bar .btn-b.active {
-            background: #c9a84c;
-            color: #0a0f0d !important;
-            border-color: #c9a84c;
-        }
-
-        .bottom-bar .btn-b i {
-            font-size: 12px;
-        }
-
-        .sound-btn {
-            position: fixed;
-            bottom: 75px;
-            right: 20px;
-            z-index: 50;
-            border: 1px solid rgba(201, 168, 76, 0.2);
-            padding: 7px 12px;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: 0.3s;
-            backdrop-filter: blur(8px);
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .sound-btn:hover {
-            background: #c9a84c;
-            color: #0a0f0d !important;
-        }
-
-        .video-timer {
-            position: fixed;
-            bottom: 75px;
-            left: 20px;
-            z-index: 50;
-            border: 1px solid rgba(201, 168, 76, 0.15);
-            padding: 5px 12px;
-            border-radius: 50px;
-            backdrop-filter: blur(8px);
-            font-size: 11px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .video-timer .progress {
-            width: 70px;
-            height: 3px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .video-timer .progress .fill {
-            height: 100%;
-            width: 0%;
-            background: #c9a84c;
-            border-radius: 10px;
-            transition: width 0.3s;
-        }
-
+        /* ===== إعدادات الشاشة ===== */
         .settings-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
             z-index: 2000;
             display: none;
@@ -538,7 +190,8 @@
         }
 
         .settings-box {
-            border: 2px solid #c9a84c;
+            background: #1a1a2e;
+            border: 2px solid #6ae3ff;
             border-radius: 20px;
             padding: 35px 40px;
             max-width: 450px;
@@ -546,6 +199,7 @@
             text-align: center;
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
             animation: slideUp 0.4s ease;
+            color: #e8e8f0;
         }
 
         @keyframes slideUp {
@@ -554,14 +208,14 @@
         }
 
         .settings-box h2 {
-            color: #c9a84c;
+            color: #6ae3ff;
             margin-bottom: 20px;
             font-size: 24px;
         }
 
         .settings-box h3 {
             font-size: 14px;
-            color: #b8a07c;
+            color: #94a3b8;
             margin: 15px 0 8px;
         }
 
@@ -574,10 +228,10 @@
 
         .settings-box .btn-setting {
             padding: 10px 20px;
-            border: 2px solid rgba(201, 168, 76, 0.3);
+            border: 2px solid rgba(106, 227, 255, 0.3);
             border-radius: 12px;
             background: transparent;
-            color: #c9a84c;
+            color: #6ae3ff;
             cursor: pointer;
             transition: 0.3s;
             font-size: 14px;
@@ -585,22 +239,22 @@
         }
 
         .settings-box .btn-setting:hover {
-            background: rgba(201, 168, 76, 0.1);
+            background: rgba(106, 227, 255, 0.1);
         }
 
         .settings-box .btn-setting.active {
-            background: #c9a84c;
-            color: #0a0f0d;
-            border-color: #c9a84c;
+            background: #6ae3ff;
+            color: #0a0a0f;
+            border-color: #6ae3ff;
         }
 
         .settings-box .btn-close {
             margin-top: 20px;
             padding: 10px 30px;
-            background: #c9a84c;
+            background: #6ae3ff;
             border: none;
             border-radius: 30px;
-            color: #0a0f0d;
+            color: #0a0a0f;
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
@@ -610,427 +264,115 @@
 
         .settings-box .btn-close:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(201, 168, 76, 0.3);
+            box-shadow: 0 0 30px rgba(106, 227, 255, 0.3);
         }
 
-        /* ===== نافذة تسجيل الدخول ===== */
-        .login-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(8px);
-            z-index: 3000;
-            justify-content: center;
-            align-items: center;
+        .settings-btn {
+            border: 1px solid rgba(106, 227, 255, 0.2);
+            color: #6ae3ff !important;
         }
-
-        .login-modal.active {
-            display: flex;
-        }
-
-        .login-modal .modal-content {
-            background: #1a1a1a;
-            border: 2px solid #c9a84c;
-            border-radius: 20px;
-            padding: 35px 40px;
-            max-width: 420px;
-            width: 90%;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
-            animation: slideUp 0.4s ease;
-            position: relative;
-        }
-
-        .login-modal .modal-content .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 28px;
-            cursor: pointer;
-            color: #f5efe6;
-            transition: 0.3s;
-            background: none;
-            border: none;
-        }
-
-        body.en .login-modal .modal-content .close-modal {
-            right: auto;
-            left: 20px;
-        }
-
-        .login-modal .modal-content .close-modal:hover {
-            color: #ff6b6b;
-            transform: rotate(90deg);
-        }
-
-        .login-modal .modal-content h2 {
-            color: #c9a84c;
-            font-size: 24px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .login-modal .modal-content .login-option {
-            display: block;
-            width: 100%;
-            padding: 14px 20px;
-            margin: 10px 0;
-            border-radius: 12px;
-            border: 2px solid rgba(201, 168, 76, 0.2);
-            background: transparent;
-            color: #f5efe6;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            text-align: center;
-            font-family: inherit;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-        }
-
-        body.day .login-modal .modal-content .login-option {
-            color: #1a1a1a;
-        }
-
-        .login-modal .modal-content .login-option:hover {
-            transform: scale(1.02);
-        }
-
-        .login-modal .modal-content .login-option.google {
-            border-color: #ea4335;
-            color: #ea4335;
-        }
-        .login-modal .modal-content .login-option.google:hover {
-            background: #ea4335;
-            color: #fff;
-        }
-
-        .login-modal .modal-content .login-option.local {
-            border-color: #6ae3ff;
-            color: #6ae3ff;
-        }
-        .login-modal .modal-content .login-option.local:hover {
+        .settings-btn:hover {
             background: #6ae3ff;
-            color: #0a0f0d;
+            color: #0a0a0f !important;
         }
 
-        .login-modal .modal-content .login-option i {
-            font-size: 20px;
-        }
-
-        .login-modal .modal-content .divider {
+        /* ===== زر فتح الملف - المستخدم يكتب اسم الملف ===== */
+        .file-open-wrapper {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin: 15px 0;
-            color: #666;
+            gap: 12px;
+            background: #0a0a0f;
+            border: 2px solid #ffd700;
+            border-radius: 12px;
+            padding: 12px 20px;
+            margin: 10px 0;
+            flex-wrap: wrap;
+            justify-content: center;
         }
-
-        .login-modal .modal-content .divider::before,
-        .login-modal .modal-content .divider::after {
-            content: '';
+        .file-open-wrapper .file-label {
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .file-open-wrapper .file-label i {
+            font-size: 1.2rem;
+        }
+        .file-open-wrapper input {
             flex: 1;
-            height: 1px;
-            background: #333;
-        }
-
-        body.day .login-modal .modal-content .divider::before,
-        body.day .login-modal .modal-content .divider::after {
-            background: #ccc;
-        }
-
-        .login-modal .modal-content .local-login-form {
-            display: none;
-            margin-top: 15px;
-        }
-
-        .login-modal .modal-content .local-login-form.active {
-            display: block;
-        }
-
-        .login-modal .modal-content .local-login-form input {
-            width: 100%;
-            padding: 12px 16px;
-            margin: 8px 0;
+            min-width: 200px;
+            background: #1a1a2e;
+            border: 1px solid #3a3a4e;
             border-radius: 8px;
-            border: 1px solid #333;
-            background: #0a0f0d;
-            color: #f5efe6;
-            font-size: 14px;
-            font-family: inherit;
+            padding: 10px 14px;
+            color: #e8e8f0;
+            font-size: 0.95rem;
+            font-family: 'Cairo', sans-serif;
             outline: none;
             transition: 0.3s;
+            direction: ltr;
         }
-
-        .login-modal .modal-content .local-login-form input:focus {
-            border-color: #c9a84c;
+        .file-open-wrapper input:focus {
+            border-color: #6ae3ff;
         }
-
-        .login-modal .modal-content .local-login-form .submit-btn {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            border-radius: 8px;
+        .file-open-wrapper input::placeholder {
+            color: #555;
+        }
+        .file-open-btn {
+            background: linear-gradient(135deg, #ffd700, #f0a500);
+            color: #0a0a0f;
             border: none;
-            background: #c9a84c;
-            color: #0a0f0d;
+            padding: 10px 28px;
+            border-radius: 30px;
             font-weight: bold;
-            font-size: 16px;
             cursor: pointer;
             transition: 0.3s;
-            font-family: inherit;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
         }
-
-        .login-modal .modal-content .local-login-form .submit-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
+        .file-open-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
         }
-
-        .login-modal .modal-content .user-status {
-            text-align: center;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 10px 0;
-            background: rgba(106, 227, 255, 0.1);
-            border: 1px solid rgba(106, 227, 255, 0.2);
-            color: #6ae3ff;
-        }
-
-        .login-modal .modal-content .user-status .user-role {
-            font-size: 12px;
+        .file-open-btn i { font-size: 1rem; }
+        .file-open-btn .fa-chevron-left { font-size: 14px; }
+        body.en .file-open-btn .fa-chevron-left { transform: rotate(180deg); }
+        .file-open-wrapper .full-url {
             color: #94a3b8;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
-
-        .login-modal .modal-content .logout-btn {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            border-radius: 8px;
-            border: none;
-            background: #ff6b6b;
-            color: #fff;
-            font-weight: bold;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-            font-family: inherit;
-        }
-
-        .login-modal .modal-content .logout-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
-        }
-
-        @media (max-width: 820px) {
-            html, body {
-                min-width: unset;
-                overflow-x: hidden;
-            }
-            body .main-content { min-width: unset; }
-            body .brand-grid { grid-template-columns: 1fr 1fr; }
-            body .bottom-bar { min-width: unset; width: 96%; }
-            .login-modal .modal-content { padding: 25px; }
-        }
-
-        @media (max-width: 480px) {
-            .hero-title { font-size: 30px; }
-            .hero-sub { font-size: 13px; letter-spacing: 2px; }
-            .hero-formula { font-size: 16px; padding: 5px 10px; }
-            .hero-formula .v { font-size: 20px; }
-            .hero-formula .r { font-size: 24px; }
-            .brand-grid { grid-template-columns: 1fr 1fr; gap: 8px; padding: 0 10px; }
-            .brand-card { padding: 12px 8px; }
-            .brand-card .card-name { font-size: 12px; }
-            .settings-box { padding: 25px 20px; }
-            .login-modal .modal-content { padding: 20px; }
-            .login-modal .modal-content .login-option { font-size: 14px; padding: 12px; }
-            .top-actions a { font-size: 9px; padding: 3px 6px; }
+        .file-open-wrapper .full-url .url-val {
+            color: #6ae3ff;
+            font-family: monospace;
+            background: #1a1a2e;
+            padding: 4px 12px;
+            border-radius: 6px;
+            border: 1px solid #2a2a3e;
+            direction: ltr;
+            font-size: 0.8rem;
         }
     </style>
 </head>
-<body class="night device-desktop">
+<body>
 
-    <!-- ===== فيديو الخلفية مع loop ===== -->
-    <video class="bg-video" id="bgVideo" autoplay muted playsinline loop poster="oasis-poster.jpg">
-        <source src="/image/heaven3.mp4" type="video/mp4" id="videoSource" />
-    </video>
-
-    <!-- ===== موسيقى خلفية ===== -->
-    <audio id="bgMusic" loop preload="auto">
-        <source src="sanaani.mp3" type="audio/mpeg" />
-        <source src="hadrami.mp3" type="audio/mpeg" />
-    </audio>
-
-    <!-- ===== الشريط العلوي ===== -->
-    <header class="top-bar">
-        <div class="brand">
-            <div class="icon"><i class="fas fa-palm-tree"></i></div>
-            <div class="name">
-                واحة الجبري
-                <small>✦ تراث اليمن العريق ✦</small>
-            </div>
-        </div>
-        <div class="top-actions">
-            <a class="btn-login" id="loginBtn">
-                <i class="fas fa-user-circle"></i> 
-                <span class="ar">دخول</span>
-                <span class="en">Login</span>
-            </a>
-            <a class="btn-exit" id="exitBtn"><i class="fas fa-power-off"></i> <span class="ar">خروج</span><span class="en">Exit</span></a>
-            <a class="btn-lang" id="langToggle"><i class="fas fa-globe"></i> <span id="langLabel">عربي</span></a>
-            <a class="btn-settings" id="settingsToggle" onclick="openSettings()"><i class="fas fa-cog"></i> <span id="settingsLabel">إعدادات</span></a>
-        </div>
-    </header>
-
-    <!-- ===== نافذة تسجيل الدخول ===== -->
-    <div class="login-modal" id="loginModal">
-        <div class="modal-content">
-            <button class="close-modal" id="closeLoginModal">&times;</button>
-            
-            <h2 id="loginTitle">🔐 <span class="ar">تسجيل الدخول</span><span class="en">Login</span></h2>
-            
-            <div id="userStatus" style="display:none;" class="user-status">
-                <div id="userNameDisplay"><i class="fas fa-check-circle"></i> <span id="userNameText">مستخدم</span></div>
-                <div class="user-role" id="userRoleDisplay">صلاحية: <span id="userRoleText">زائر</span></div>
-            </div>
-
-            <div id="loginOptions">
-                <button class="login-option google" id="googleLoginBtn">
-                    <i class="fab fa-google"></i> 
-                    <span class="ar">تسجيل الدخول بحساب Google</span>
-                    <span class="en">Sign in with Google</span>
-                </button>
-
-                <div class="divider"><span class="ar">أو</span><span class="en">OR</span></div>
-
-                <button class="login-option local" id="localLoginToggle">
-                    <i class="fas fa-users"></i> 
-                    <span class="ar">نظام المستخدمين والصلاحيات</span>
-                    <span class="en">Local Users & Permissions</span>
-                </button>
-
-                <div class="local-login-form" id="localLoginForm">
-                    <input type="text" id="localUsername" placeholder="اسم المستخدم / Username" dir="ltr">
-                    <input type="password" id="localPassword" placeholder="كلمة المرور / Password" dir="ltr">
-                    <button class="submit-btn" id="localLoginBtn">
-                        <i class="fas fa-sign-in-alt"></i> 
-                        <span class="ar">دخول</span>
-                        <span class="en">Login</span>
-                    </button>
-                    <div style="text-align:center;margin-top:8px;font-size:12px;color:#666;">
-                        <span class="ar">مستخدم افتراضي: admin / 12345</span>
-                        <span class="en">Default: admin / 12345</span>
-                    </div>
-                </div>
-            </div>
-
-            <button class="logout-btn" id="logoutBtn" style="display:none;">
-                <i class="fas fa-sign-out-alt"></i> 
-                <span class="ar">تسجيل الخروج</span>
-                <span class="en">Logout</span>
-            </button>
-        </div>
-    </div>
-
-    <!-- ===== المحتوى ===== -->
-    <div class="main-content">
-
-        <!-- ===== قسم البطل ===== -->
-        <section class="hero-section">
-            <div class="hero-badge">
-                <i class="fas fa-scroll"></i>
-                <span>واحة الجبري</span>
-                <i class="fas fa-scroll"></i>
-            </div>
-
-            <h1 class="hero-title">
-                واحة <span>الجبري</span>
-            </h1>
-            <p class="hero-sub">تراث اليمن العريق</p>
-
-            <div class="hero-philosophy">
-                <p><i class="fas fa-seedling"></i> من أصفار ريمان إلى بنية الكون</p>
-                <p><i class="fas fa-gem"></i> نظرية السندباد الموحدة</p>
-            </div>
-
-            <div class="hero-formula">
-                <span class="b">[</span>
-                <span class="v">Z</span>
-                <span class="p">+</span>
-                <span class="v">C</span>
-                <span class="p">+</span>
-                <span class="v">A</span>
-                <span class="b">]</span>
-                <span class="e">=</span>
-                <span class="r">1</span>
-            </div>
-
-            <div class="hero-mission">
-                <i class="fas fa-quote-right"></i>
-                نستكشف الماضي لنفهم الحاضر.. ونبني المستقبل
-                <i class="fas fa-quote-left"></i>
-                <span class="emoji">😊😊</span>
-            </div>
-        </section>
-
-        <!-- ===== شبكة البراند ===== -->
-        <div class="brand-grid">
-            <div class="brand-card" data-page="/Page11.html">
-                <div class="card-icon"><i class="fas fa-crown"></i></div>
-                <div class="card-name">واحة الجبري</div>
-                <div class="card-sub">تراث اليمن العريق</div>
-                <div class="card-formula">[Z + C + A] = 1</div>
-            </div>
-            <div class="brand-card" data-page="heaven-info.html">
-                <div class="card-icon"><i class="fas fa-tree"></i></div>
-                <div class="card-name">Heaven Al-Jabri</div>
-                <div class="card-sub">تراث اليمن العريق</div>
-                <div class="card-formula">[Z + C + A] = 1</div>
-            </div>
-            <div class="brand-card" data-page="/journal4.html">
-                <div class="card-icon"><i class="fas fa-landmark"></i></div>
-                <div class="card-name">واقعة الجبرى</div>
-                <div class="card-sub">تراث اليمن العربي</div>
-                <div class="card-formula">[Z + C + A] = 1</div>
-            </div>
-            <div class="brand-card" data-page="/calculator.html">
-                <div class="card-icon"><i class="fas fa-unity"></i></div>
-                <div class="card-name">الوحدة العربية</div>
-                <div class="card-sub">تراث اليمن العربي</div>
-                <div class="card-formula">[Z + C + A] = 1</div>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- ===== الأزرار السفلية ===== -->
-    <div class="bottom-bar">
-        <a class="btn-b" data-action="chat" data-page="Page11.html"><i class="fas fa-comment-dots"></i> <span class="ar">محادثة</span><span class="en">Chat</span></a>
-        <a class="btn-b" data-action="lang" data-page="Page11.html"><i class="fas fa-language"></i> <span class="ar">عربي</span><span class="en">English</span></a>
-        <a class="btn-b" data-action="visitors" data-page="Page12.html"><i class="fas fa-users"></i> <span class="ar">زوار</span><span class="en">Visitors</span> <span id="visitorsCount">1,247</span></a>
-        <a class="btn-b" data-action="music" data-page="Page11.html"><i class="fas fa-music"></i> <span class="ar">موسيقى</span><span class="en">Music</span></a>
-        <a class="btn-b" data-action="institute" data-page="Page12.html"><i class="fas fa-info-circle"></i> <span class="ar">الباحث</span><span class="en">Institute</span></a>
-        <a class="btn-b active" data-action="listen" data-page="Page11.html"><i class="fas fa-play"></i> <span class="ar">استمع الآن</span><span class="en">Listen Now</span></a>
-    </div>
-
-    <!-- ===== زر الصوت ===== -->
-    <button class="sound-btn" id="soundBtn">
-        <i class="fas fa-volume-mute"></i> <span id="soundText"><span class="ar">تشغيل الصوت</span><span class="en">Unmute</span></span>
+    <audio id="bgMusic" loop preload="auto"><source src="image/music.mp3" type="audio/mpeg"></audio>
+    <button class="music-btn-fixed" id="musicToggle" title="🎵 تشغيل / إيقاف">🎵<i class="fas fa-music"></i></button>
+    
+    <button class="lang-btn" onclick="toggleLang()"><i class="fas fa-globe"></i><span class="ar">🇬🇧 English</span><span class="en">🇾🇪 عربي</span></button>
+    
+    <button class="lang-btn settings-btn" onclick="openSettings()" style="position:fixed; top:65px; left:20px; background:transparent; border:1px solid #6ae3ff; color:#6ae3ff; padding:6px 14px; border-radius:6px; cursor:pointer; font-size:13px; z-index:999; display:flex; align-items:center; gap:6px;">
+        <i class="fas fa-cog"></i> <span class="ar">إعدادات</span><span class="en">Settings</span>
     </button>
 
-    <!-- ===== عداد الفيديو ===== -->
-    <div class="video-timer">
-        <span id="timeDisplay">00:00 / 00:45</span>
-        <div class="progress">
-            <div class="fill" id="progressFill"></div>
-        </div>
-    </div>
+    <div id="visitorCounter"><i class="fas fa-users"></i><span class="ar">زوار:</span><span class="en">Visitors:</span><span id="visitorCountDisplay">1</span></div>
 
     <!-- ===== إعدادات الشاشة ===== -->
     <div class="settings-overlay" id="settingsOverlay">
@@ -1049,208 +391,93 @@
                 <button class="btn-setting active" id="nightBtn" onclick="setMode('night')">🌙 <span class="ar">ليلي</span><span class="en">Night</span></button>
             </div>
 
-            <h3 id="currentStatus" style="color: #c9a84c; margin-top: 15px;">Desktop 🖥️ · 🌙 <span class="ar">ليلي</span><span class="en">Night</span></h3>
+            <h3 id="currentStatus" style="color: #6ae3ff; margin-top: 15px;">Desktop 🖥️ · 🌙 Night</h3>
 
             <button class="btn-close" onclick="closeSettings()">✕ <span class="ar">إغلاق</span><span class="en">Close</span></button>
         </div>
     </div>
 
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-search"></i> <span class="ar">نظام فحص الواحة</span><span class="en">Jabri Checkout System</span></h1>
+            <div class="subtitle"><i class="fas fa-flag"></i> <span class="ar">🇾🇪 فحص شامل للروابط، السرعة، 404، والأداء</span><span class="en">🇾🇪 Full Link, Speed, 404 & Performance Scan</span></div>
+            <p style="color: #94a3b8; margin-top: 8px;"><i class="fas fa-link"></i><span class="ar">فحص كل صفحة، كل رابط، كل ملف، كل ريبو</span><span class="en">Scan every page, link, file & repo</span></p>
+        </header>
+        <div id="errorBox"></div>
+
+        <!-- ===== زر فتح الملف - المستخدم يكتب اسم الملف ===== -->
+        <div class="file-open-wrapper">
+            <div class="file-label">
+                <i class="fas fa-file-code"></i>
+                <span class="ar">📂 فتح ملف:</span>
+                <span class="en">📂 Open File:</span>
+            </div>
+            <input type="text" id="filePathInput" placeholder="logo.html" value="logo.html" dir="ltr">
+            <button class="file-open-btn" id="fileOpenBtn">
+                <i class="fas fa-external-link-alt"></i>
+                <span class="ar">فتح</span>
+                <span class="en">Open</span>
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="full-url">
+                <i class="fas fa-link"></i>
+                <span class="ar">الرابط:</span><span class="en">URL:</span>
+                <span class="url-val" id="fullUrlDisplay">https://jabri-com.vercel.app/logo.html</span>
+            </div>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin: 20px 0;">
+            <button class="run-btn" id="runFullScan"><i class="fas fa-rocket"></i> <span class="ar">فحص شامل</span><span class="en">Full Scan</span></button>
+            <button class="run-btn speed" id="runSpeedTest"><i class="fas fa-bolt"></i> <span class="ar">اختبار السرعة</span><span class="en">Speed Test</span></button>
+            <button class="run-btn error" id="run404Test"><i class="fas fa-exclamation-triangle"></i> <span class="ar">فحص 404</span><span class="en">404 Check</span></button>
+            <button class="run-btn structure" id="runStructureCheck"><i class="fas fa-folder-tree"></i> <span class="ar">فحص الهيكلة</span><span class="en">Structure Check</span></button>
+            <button class="run-btn clear" id="clearLogs"><i class="fas fa-trash"></i> <span class="ar">مسح السجل</span><span class="en">Clear Logs</span></button>
+            
+            <button class="diagnose-btn" onclick="window.location.href='diagnose.html'">
+                <i class="fas fa-stethoscope"></i> <span class="ar">📊 تشخيص المستودعات</span><span class="en">📊 Repo Diagnosis</span>
+            </button>
+            
+            <button class="explore-btn" onclick="window.location.href='current-auto.html'">
+                <i class="fas fa-compass"></i> <span class="ar">🧭 المستكشف</span><span class="en">🧭 Explore</span>
+            </button>
+        </div>
+
+        <div class="progress-bar"><div class="fill" id="progressFill"></div></div>
+        <div class="grid-2">
+            <div class="card"><h2><i class="fas fa-file-alt"></i> <span class="ar">الصفحات (Page1-12)</span><span class="en">Pages (Page1-12)</span></h2><div class="links-grid" id="pageLinks"></div><div style="margin-top: 10px; font-size: 0.85rem; color: #94a3b8;"><i class="fas fa-check-circle" style="color:#00ff88;"></i><span class="ar">جاهزة: <span id="pageReady">0</span> / 12</span><span class="en">Ready: <span id="pageReadyEn">0</span> / 12</span></div></div>
+            <div class="card"><h2><i class="fas fa-folder-open"></i> <span class="ar">الريبوهات</span><span class="en">Repositories</span></h2><div class="links-grid" id="repoLinks"></div><div style="margin-top: 10px; font-size: 0.85rem; color: #94a3b8;"><i class="fas fa-code-fork" style="color:#ffd700;"></i><span class="ar">ريبوهات: <span id="repoCount">0</span></span><span class="en">Repos: <span id="repoCountEn">0</span></span></div></div>
+        </div>
+        <div class="card" style="margin-top: 20px;"><h2><i class="fas fa-toolbox"></i> <span class="ar">repo9 - أدوات الواحة</span><span class="en">repo9 - Jabri Tools</span></h2><div class="badge"><i class="fas fa-check-circle"></i> ✅ يعمل على Vercel</div><div class="repo9-grid">
+            <a href="https://jabri-web.vercel.app/publish/publish.html" class="repo9-card" style="border-color: #25D366; background: #0a0a0f;">
+                <i class="fab fa-whatsapp" style="color: #25D366; font-size: 2rem; display: block; margin-bottom: 6px;"></i>
+                <div class="title" style="color: #25D366;">💬 واتساب الواحة</div>
+                <div class="desc" style="color: #94a3b8;">نشر المنشورات</div>
+            </a>
+            <a href="yemen-photo2.html" class="repo9-card"><i class="fas fa-images icon-yellow"></i><div class="title">📸 معرض JSON</div><div class="desc">يعمل على Vercel</div></a>
+            <a href="yemen-photo-php.html" class="repo9-card"><i class="fab fa-php icon-purple"></i><div class="title">🐘 معرض PHP</div><div class="desc">قراءة تلقائية</div></a>
+            <a href="yemen-photo-api.html" class="repo9-card"><i class="fab fa-php icon-purple"></i><div class="title">🐘 معرض API</div><div class="desc">قراءة تلقائية</div></a>
+            <a href="yemen-photo.html" class="repo9-card"><i class="fab fa-php icon-purple"></i><div class="title">🐘 معرض اليمن</div><div class="desc">قراءة تقائمة</div></a>
+            <a href="gallery.html" class="repo9-card"><i class="fab fa-php icon-purple"></i><div class="title">معرض Gallery</div><div class="desc">قراءة تقائمة</div></a>
+            <a href="diagnose.html" class="repo9-card"><i class="fas fa-search icon-blue"></i><div class="title">🔍 نظام الفحص</div><div class="desc">فحص الروابط</div></a>
+            <a href="Page9.html" class="repo9-card"><i class="fas fa-file-alt icon-green"></i><div class="title">📄 Page9</div><div class="desc">الصفحة الرئيسية</div></a>
+            <a href="file-structure.html" class="repo9-card"><i class="fas fa-sitemap icon-orange"></i><div class="title">🗺️ الهيكلة</div><div class="desc">خريطة الموقع</div></a>
+            <a href="all-links.html" class="repo9-card"><i class="fas fa-link icon-blue"></i><div class="title">🔗 الروابط</div><div class="desc">جميع الروابط</div></a>
+            <a href="header.html" class="repo9-card"><i class="fas fa-header icon-purple"></i><div class="title">📋 الهيدر</div><div class="desc">رأس الصفحة</div></a>
+            <a href="file-structure2.html" class="repo9-card"><i class="fas fa-copy icon-green"></i><div class="title">📄 هيكلة 2</div><div class="desc">نسخة بديلة</div></a>
+            <a href="diagnose.html" class="repo9-card" style="border-color:#a855f7;"><i class="fas fa-stethoscope icon-purple"></i><div class="title">📊 Diagnose</div><div class="desc">تشخيص المستودعات</div></a>
+            <a href="current-auto.html" class="repo9-card" style="border-color:#ff6a6a;">
+                <i class="fas fa-compass icon-red"></i>
+                <div class="title" style="color:#ff6a6a;">🧭 المستكشف</div>
+                <div class="desc">استكشاف الواحة</div>
+            </a>
+        </div></div>
+        <div class="card" style="margin-top: 20px;"><h2><i class="fas fa-chart-bar"></i> <span class="ar">نتائج الفحص</span><span class="en">Scan Results</span></h2><div style="overflow-x: auto;"><table class="result-table" id="resultTable"><thead><tr><th><i class="fas fa-cube"></i> <span class="ar">العنصر</span><span class="en">Item</span></th><th><i class="fas fa-circle"></i> <span class="ar">الحالة</span><span class="en">Status</span></th><th><i class="fas fa-clock"></i> <span class="ar">الوقت (ms)</span><span class="en">Time (ms)</span></th><th><i class="fas fa-flag-checkered"></i> <span class="ar">النتيجة</span><span class="en">Result</span></th></tr></thead><tbody id="resultBody"><tr><td colspan="4" style="color:#666;"><i class="fas fa-search"></i> <span class="ar">اضغط "فحص شامل" للبدء</span><span class="en">Press "Full Scan" to start</span></td></tr></tbody></table></div></div>
+        <div class="card" style="margin-top: 20px;"><h2><i class="fas fa-list"></i> <span class="ar">سجل الفحص</span><span class="en">Scan Log</span></h2><div class="log-box" id="logBox"><div class="log-info"><i class="fas fa-info-circle"></i> <span class="ar">انتظر بدء الفحص...</span><span class="en">Waiting for scan...</span></div></div></div>
+        <div id="footer-placeholder"></div>
+    </div>
+
     <script>
-        // ============================================================
-        // ===== تشغيل الصوت تلقائياً عند أول لمسة =====
-        // ============================================================
-
-        document.addEventListener('click', function firstInteraction() {
-            const bgMusic = document.getElementById('bgMusic');
-            if (bgMusic) {
-                bgMusic.volume = 0.3;
-                bgMusic.play().catch(function() {
-                    console.log('⚠️ المتصفح منع التشغيل التلقائي');
-                });
-            }
-            document.removeEventListener('click', firstInteraction);
-        }, { once: true });
-
-        // أيضاً للمس (Touch) على الجوال
-        document.addEventListener('touchstart', function firstTouch() {
-            const bgMusic = document.getElementById('bgMusic');
-            if (bgMusic) {
-                bgMusic.volume = 0.3;
-                bgMusic.play().catch(function() {
-                    console.log('⚠️ المتصفح منع التشغيل التلقائي');
-                });
-            }
-            document.removeEventListener('touchstart', firstTouch);
-        }, { once: true });
-
-        // ============================================================
-        // ===== نظام تسجيل الدخول =====
-        // ============================================================
-
-        const USERS = {
-            'admin': { password: '12345', role: 'admin', name: 'المدير' },
-            'moderator': { password: 'mod123', role: 'moderator', name: 'مشرف' },
-            'user': { password: 'user123', role: 'user', name: 'مستخدم' },
-            'guest': { password: 'guest', role: 'guest', name: 'زائر' }
-        };
-
-        let currentUser = null;
-
-        const loginBtn = document.getElementById('loginBtn');
-        const loginModal = document.getElementById('loginModal');
-        const closeLoginModal = document.getElementById('closeLoginModal');
-        const googleLoginBtn = document.getElementById('googleLoginBtn');
-        const localLoginToggle = document.getElementById('localLoginToggle');
-        const localLoginForm = document.getElementById('localLoginForm');
-        const localLoginBtn = document.getElementById('localLoginBtn');
-        const localUsername = document.getElementById('localUsername');
-        const localPassword = document.getElementById('localPassword');
-        const logoutBtn = document.getElementById('logoutBtn');
-        const userStatus = document.getElementById('userStatus');
-        const userNameText = document.getElementById('userNameText');
-        const userRoleText = document.getElementById('userRoleText');
-        const loginOptions = document.getElementById('loginOptions');
-        const loginTitle = document.getElementById('loginTitle');
-
-        function openLoginModal() {
-            loginModal.classList.add('active');
-            updateLoginUI();
-        }
-
-        function closeLoginModalFn() {
-            loginModal.classList.remove('active');
-            localLoginForm.classList.remove('active');
-        }
-
-        loginBtn.addEventListener('click', openLoginModal);
-        closeLoginModal.addEventListener('click', closeLoginModalFn);
-        loginModal.addEventListener('click', function(e) {
-            if (e.target === this) closeLoginModalFn();
-        });
-
-        function updateLoginUI() {
-            if (currentUser) {
-                userStatus.style.display = 'block';
-                loginOptions.style.display = 'none';
-                logoutBtn.style.display = 'block';
-                userNameText.textContent = currentUser.name;
-                userRoleText.textContent = currentUser.role;
-                loginTitle.innerHTML = '👤 <span class="ar">مرحباً</span><span class="en">Welcome</span> ' + currentUser.name;
-            } else {
-                userStatus.style.display = 'none';
-                loginOptions.style.display = 'block';
-                logoutBtn.style.display = 'none';
-                loginTitle.innerHTML = '🔐 <span class="ar">تسجيل الدخول</span><span class="en">Login</span>';
-                localLoginForm.classList.remove('active');
-            }
-        }
-
-        googleLoginBtn.addEventListener('click', function() {
-            currentUser = { name: 'مستخدم Google', role: 'google', email: 'user@gmail.com' };
-            updateLoginUI();
-            setTimeout(closeLoginModalFn, 1500);
-            console.log('✅ تم تسجيل الدخول بحساب Google:', currentUser);
-        });
-
-        localLoginToggle.addEventListener('click', function() {
-            localLoginForm.classList.toggle('active');
-        });
-
-        localLoginBtn.addEventListener('click', function() {
-            const username = localUsername.value.trim();
-            const password = localPassword.value.trim();
-
-            if (!username || !password) {
-                alert('⚠️ الرجاء إدخال اسم المستخدم وكلمة المرور');
-                return;
-            }
-
-            const user = USERS[username];
-            if (user && user.password === password) {
-                currentUser = { name: user.name, role: user.role, username: username };
-                updateLoginUI();
-                localUsername.value = '';
-                localPassword.value = '';
-                localLoginForm.classList.remove('active');
-                setTimeout(closeLoginModalFn, 1000);
-                console.log('✅ تم تسجيل الدخول المحلي:', currentUser);
-            } else {
-                alert('❌ اسم المستخدم أو كلمة المرور غير صحيحة');
-            }
-        });
-
-        localUsername.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') localPassword.focus();
-        });
-        localPassword.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') localLoginBtn.click();
-        });
-
-        logoutBtn.addEventListener('click', function() {
-            currentUser = null;
-            updateLoginUI();
-            console.log('👋 تم تسجيل الخروج');
-            setTimeout(closeLoginModalFn, 500);
-        });
-
-        // ============================================================
-        // ===== الأزرار السفلية =====
-        // ============================================================
-
-        document.querySelectorAll('.btn-b').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                const page = this.dataset.page || 'Page11.html';
-                console.log(`🔗 توجيه إلى: ${page}`);
-                window.location.href = page;
-            });
-        });
-
-        // ============================================================
-        // ===== بطاقات البراند =====
-        // ============================================================
-
-        document.querySelectorAll('.brand-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const page = this.dataset.page || '/Page11.html';
-                console.log(`🔗 توجيه إلى: ${page}`);
-                window.location.href = page;
-            });
-        });
-
-        // ============================================================
-        // ===== زر Exit =====
-        // ============================================================
-
-        document.getElementById('exitBtn').addEventListener('click', function(e) {
-            e.preventDefault();
-            console.log('👋 خروج من الواحة');
-            window.location.href = 'https://www.google.com';
-        });
-
-        // ============================================================
-        // ===== الإعدادات =====
-        // ============================================================
-
-        function openSettings() {
-            document.getElementById('settingsOverlay').classList.add('active');
-        }
-
-        function closeSettings() {
-            document.getElementById('settingsOverlay').classList.remove('active');
-        }
-
-        document.getElementById('settingsOverlay').addEventListener('click', function(e) {
-            if (e.target === this) closeSettings();
-        });
-
-        window.openSettings = openSettings;
-        window.closeSettings = closeSettings;
-
-        // ============================================================
         // ===== إعدادات الجهاز =====
-        // ============================================================
-
         let currentDevice = 'desktop';
         let currentMode = 'night';
 
@@ -1267,8 +494,14 @@
             currentMode = mode;
             document.getElementById('dayBtn').classList.toggle('active', mode === 'day');
             document.getElementById('nightBtn').classList.toggle('active', mode === 'night');
-            document.body.classList.remove('day', 'night');
-            document.body.classList.add(mode);
+            
+            if (mode === 'day') {
+                document.body.style.background = '#f5efe6';
+                document.body.style.color = '#1a1a1a';
+            } else {
+                document.body.style.background = '#0a0a0f';
+                document.body.style.color = '#e8e8f0';
+            }
             updateStatus();
         }
 
@@ -1278,105 +511,152 @@
             document.getElementById('currentStatus').textContent = deviceText + ' · ' + modeText;
         }
 
-        window.setDevice = setDevice;
-        window.setMode = setMode;
-
-        // ============================================================
-        // ===== فيديو =====
-        // ============================================================
-
-        const video = document.getElementById('bgVideo');
-        const progressFill = document.getElementById('progressFill');
-        const timeDisplay = document.getElementById('timeDisplay');
-
-        function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+        function openSettings() {
+            document.getElementById('settingsOverlay').classList.add('active');
         }
 
-        video.addEventListener('timeupdate', function() {
-            const current = video.currentTime;
-            const duration = video.duration || 45;
-            const percent = (current / duration) * 100;
-            progressFill.style.width = Math.min(percent, 100) + '%';
-            timeDisplay.textContent = formatTime(Math.floor(current)) + ' / ' + formatTime(Math.floor(duration));
+        function closeSettings() {
+            document.getElementById('settingsOverlay').classList.remove('active');
+        }
+
+        document.getElementById('settingsOverlay').addEventListener('click', function(e) {
+            if (e.target === this) closeSettings();
         });
 
-        // ============================================================
-        // ===== الصوت =====
-        // ============================================================
+        // ===== الوظائف الأساسية =====
+        function generateLinks() {
+            const pageContainer = document.getElementById('pageLinks'); const pages = []; for (let i = 1; i <= 12; i++) { pages.push(`Page${i}.html`); }
+            pageContainer.innerHTML = pages.map(p => `<a href="/${p}" target="_blank"><i class="fas fa-file-code"></i> ${p}</a>`).join('');
+            document.getElementById('pageReady').innerText = 12; document.getElementById('pageReadyEn').innerText = 12;
+            const repoContainer = document.getElementById('repoLinks'); const repos = ['Jabri-web', 'Jabri_RiemannOS', 'Zx_Mother_Function_Jabri', 'Jabri_Nobble', 'Jabri_Checkout', 'Jabri_Archive'];
+            repoContainer.innerHTML = repos.map(r => `<a href="https://github.com/jabri-web/${r}" target="_blank"><i class="fab fa-github"></i> ${r}</a>`).join('');
+            document.getElementById('repoCount').innerText = repos.length; document.getElementById('repoCountEn').innerText = repos.length;
+        }
 
-        const soundBtn = document.getElementById('soundBtn');
-        const bgMusic = document.getElementById('bgMusic');
-        let isSoundOn = false;
+        function addLog(msg, type = 'info') {
+            const box = document.getElementById('logBox'); const icons = { ok: '<i class="fas fa-check-circle" style="color:#00ff88;"></i>', fail: '<i class="fas fa-times-circle" style="color:#ff4444;"></i>', warn: '<i class="fas fa-exclamation-circle" style="color:#ffd700;"></i>', info: '<i class="fas fa-info-circle" style="color:#6ae3ff;"></i>' };
+            const cls = { ok: 'log-ok', fail: 'log-fail', warn: 'log-warn', info: 'log-info' }; const time = new Date().toLocaleTimeString();
+            box.innerHTML += `<div class="${cls[type] || 'log-info'}">${icons[type] || icons.info} [${time}] ${msg}</div>`; box.scrollTop = box.scrollHeight;
+        }
 
-        soundBtn.addEventListener('click', function() {
-            if (isSoundOn) {
-                video.muted = true;
-                bgMusic.muted = true;
-                soundBtn.innerHTML = '<i class="fas fa-volume-mute"></i> <span id="soundText"><span class="ar">تشغيل الصوت</span><span class="en">Unmute</span></span>';
-                isSoundOn = false;
-            } else {
-                video.muted = false;
-                bgMusic.muted = false;
-                soundBtn.innerHTML = '<i class="fas fa-volume-up"></i> <span id="soundText"><span class="ar">كتم الصوت</span><span class="en">Mute</span></span>';
-                isSoundOn = true;
-            }
+        function clearLogs() { document.getElementById('logBox').innerHTML = ''; document.getElementById('resultBody').innerHTML = ''; document.getElementById('progressFill').style.width = '0%'; addLog('🗑️ <span class="ar">تم مسح السجل</span><span class="en">Logs cleared</span>', 'info'); }
+
+        function checkPage(url) { return new Promise((resolve) => { const start = performance.now(); fetch(url, { method: 'HEAD', cache: 'no-cache' }).then(res => resolve({ url, status: res.status, time: Math.round(performance.now() - start), ok: res.ok })).catch(() => resolve({ url, status: 404, time: Math.round(performance.now() - start), ok: false })); }); }
+
+        async function checkStructure() {
+            addLog('📂 <span class="ar">جاري التحقق من هيكلة الملفات...</span><span class="en">Checking file structure...</span>', 'info'); try {
+                const response = await fetch('/file-structure.txt'); if (!response.ok) { addLog('❌ <span class="ar">تعذر العثور على ملف الهيكلة</span><span class="en">Structure file not found</span>', 'fail'); return; }
+                const text = await response.text(); const pathRegex = /(?:[\/\w.-]+\/)*[\w.-]+\.(?:html|js|css|txt|webp|mp3|json|png|jpg|xml)/g; const paths = text.match(pathRegex);
+                if (!paths || paths.length === 0) { addLog('⚠️ <span class="ar">لم يتم العثور على مسارات صالحة</span><span class="en">No valid paths found</span>', 'warn'); return; }
+                const uniquePaths = [...new Set(paths)]; addLog(`📊 <span class="ar">تم العثور على ${uniquePaths.length} ملف</span><span class="en">Found ${uniquePaths.length} files</span>`, 'info'); let found = 0, missing = 0;
+                for (const filePath of uniquePaths) { if (filePath.startsWith('http')) continue; let cleanPath = filePath.replace(/^\.\/|^\//, ''); if (!cleanPath.startsWith('/')) cleanPath = '/' + cleanPath; const result = await checkPage(cleanPath);
+                    if (result.ok) { found++; addLog(`✅ ${cleanPath} — موجود (${result.status})`, 'ok'); } else { missing++; addLog(`❌ ${cleanPath} — مفقود (${result.status})`, 'fail'); } }
+                addLog(`📊 <span class="ar">خلاصة: ✅ ${found} موجود | ❌ ${missing} مفقود</span><span class="en">Summary: ✅ ${found} found | ❌ ${missing} missing</span>`, missing === 0 ? 'ok' : 'fail');
+            } catch (error) { addLog(`💥 <span class="ar">خطأ: ${error.message}</span><span class="en">Error: ${error.message}</span>`, 'fail'); }
+        }
+
+        async function runFullScan() {
+            const btn = document.getElementById('runFullScan'); btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span class="ar">جاري الفحص...</span><span class="en">Scanning...</span>';
+            document.getElementById('resultBody').innerHTML = ''; clearLogs(); addLog('🚀 <span class="ar">بدء الفحص الشامل...</span><span class="en">Starting full scan...</span>', 'info');
+            const progress = document.getElementById('progressFill'); const results = []; const pages = []; for (let i = 1; i <= 12; i++) pages.push(`Page${i}.html`); pages.push('theory-ar.html', 'theory-en.html', 'Checkout.html', 'Check.html', 'file-structure.html'); let completed = 0, total = pages.length;
+            for (const page of pages) { const url = `/${page}`; const result = await checkPage(url); results.push(result); completed++; progress.style.width = `${(completed / total) * 100}%`; const statusClass = result.ok ? 'pass' : 'fail';
+                addLog(`${result.ok ? '✅' : '❌'} ${page} — ${result.status} (${result.time}ms)`, result.ok ? 'ok' : 'fail'); const row = document.createElement('tr'); row.innerHTML = `<td>${page}</td><td class="${statusClass}">${result.status}</td><td>${result.time}</td><td class="${statusClass}">${result.ok ? '<i class="fas fa-check-circle" style="color:#00ff88;"></i>' : '<i class="fas fa-times-circle" style="color:#ff4444;"></i>'}</td>`; document.getElementById('resultBody').appendChild(row); }
+            const okCount = results.filter(r => r.ok).length; const failCount = results.filter(r => !r.ok).length; const avgTime = Math.round(results.reduce((sum, r) => sum + r.time, 0) / results.length);
+            addLog(`📊 <span class="ar">النتيجة: ✅ ${okCount} | ❌ ${failCount} | ⏱️ ${avgTime}ms</span><span class="en">Final: ✅ ${okCount} | ❌ ${failCount} | ⏱️ ${avgTime}ms</span>`, 'info'); btn.disabled = false; btn.innerHTML = '<i class="fas fa-rocket"></i> <span class="ar">فحص شامل</span><span class="en">Full Scan</span>'; progress.style.width = '100%';
+        }
+
+        async function runSpeedTest() {
+            const btn = document.getElementById('runSpeedTest'); btn.disabled = true; addLog('⚡ <span class="ar">اختبار السرعة...</span><span class="en">Speed test...</span>', 'info'); const urls = ['/', '/Sanaa.html', '/Shibam.html', '/Soqatra.html', '/theory-ar.html', '/theory-en.html', '/Checkout.html']; const results = [];
+            for (const url of urls) { const start = performance.now(); try { await fetch(url, { cache: 'no-cache' }); const time = Math.round(performance.now() - start); results.push({ url, time, ok: true }); addLog(`⚡ ${url} — ${time}ms`, 'ok'); }
+            catch { const time = Math.round(performance.now() - start); results.push({ url, time, ok: false }); addLog(`❌ ${url} — فشل (${time}ms)`, 'fail'); } }
+            const avg = Math.round(results.reduce((s, r) => s + r.time, 0) / results.length); const fastest = Math.min(...results.map(r => r.time)); const slowest = Math.max(...results.map(r => r.time));
+            addLog(`📊 <span class="ar">السرعة: المتوسط ${avg}ms | الأسرع ${fastest}ms | الأبطأ ${slowest}ms</span><span class="en">Speed: Avg ${avg}ms | Fastest ${fastest}ms | Slowest ${slowest}ms</span>`, 'info'); btn.disabled = false;
+        }
+
+        async function run404Test() {
+            const btn = document.getElementById('run404Test'); btn.disabled = true; addLog('🚨 <span class="ar">فحص 404...</span><span class="en">404 check...</span>', 'warn'); const testUrls = ['/nonexistent.html', '/fake-page', '/wrong-path', '/missing-file.js', '/invalid.css']; let found404 = 0;
+            for (const url of testUrls) { const result = await checkPage(url); if (result.status === 404) { found404++; addLog(`🚨 404 تم كشفه: ${url}`, 'warn'); } else { addLog(`✅ ${url} — ${result.status}`, 'ok'); } }
+            addLog(`📊 <span class="ar">تم كشف ${found404} من ${testUrls.length} روابط 404</span><span class="en">Found ${found404} of ${testUrls.length} 404 links</span>`, found404 > 0 ? 'warn' : 'ok'); btn.disabled = false;
+        }
+
+        function toggleLang() { const html = document.documentElement; const newLang = html.lang === 'ar' ? 'en' : 'ar'; html.lang = newLang; html.dir = newLang === 'ar' ? 'rtl' : 'ltr'; document.body.classList.toggle('en', newLang === 'en'); localStorage.setItem('preferred-language', newLang); }
+
+        (function() { let count = parseInt(localStorage.getItem('jabri_visitor_count_checkout') || '0'); count += 1; localStorage.setItem('jabri_visitor_count_checkout', count); document.getElementById('visitorCountDisplay').innerText = count; })();
+
+        (function() { const music = document.getElementById('bgMusic'); const btn = document.getElementById('musicToggle'); if (!music || !btn) return; let isPlaying = false; music.volume = 0.3;
+            btn.addEventListener('click', function() { if (isPlaying) { music.pause(); btn.innerHTML = '<i class="fas fa-music"></i>'; btn.classList.remove('playing'); isPlaying = false; } else { music.play().then(() => { btn.innerHTML = '<i class="fas fa-volume-up"></i>'; btn.classList.add('playing'); isPlaying = true; }).catch(() => {}); } });
+            document.addEventListener('click', function firstInteraction() { if (!isPlaying) { music.play().then(() => { btn.innerHTML = '<i class="fas fa-volume-up"></i>'; btn.classList.add('playing'); isPlaying = true; }).catch(() => {}); } document.removeEventListener('click', firstInteraction); }); })();
+
+        // ===== زر فتح الملف - المستخدم يكتب اسم الملف =====
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('filePathInput');
+            const urlDisplay = document.getElementById('fullUrlDisplay');
+            const openBtn = document.getElementById('fileOpenBtn');
+            const BASE_URL = 'https://jabri-com.vercel.app/';
+
+            // تحديث العرض عند تغيير المدخل
+            input.addEventListener('input', function() {
+                const val = this.value.trim() || '';
+                if (val) {
+                    urlDisplay.textContent = BASE_URL + val;
+                } else {
+                    urlDisplay.textContent = BASE_URL;
+                }
+            });
+
+            // عند الضغط على زر الفتح
+            openBtn.addEventListener('click', function() {
+                const val = input.value.trim() || '';
+                let fullUrl = BASE_URL;
+                if (val) {
+                    fullUrl = BASE_URL + val;
+                }
+                urlDisplay.textContent = fullUrl;
+                
+                // تسجيل في السجل
+                addLog(`📂 <span class="ar">جاري فتح: ${fullUrl}</span><span class="en">Opening: ${fullUrl}</span>`, 'info');
+                
+                // فتح الصفحة في نافذة جديدة
+                window.open(fullUrl, '_blank');
+            });
+
+            // عند الضغط على Enter في حقل الإدخال
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    openBtn.click();
+                }
+            });
+
+            generateLinks(); 
+            document.getElementById('runFullScan').addEventListener('click', runFullScan); 
+            document.getElementById('runSpeedTest').addEventListener('click', runSpeedTest);
+            document.getElementById('run404Test').addEventListener('click', run404Test); 
+            document.getElementById('runStructureCheck').addEventListener('click', checkStructure); 
+            document.getElementById('clearLogs').addEventListener('click', clearLogs);
+            
+            // استعادة اللغة المحفوظة
+            const savedLang = localStorage.getItem('preferred-language') || 'ar'; 
+            document.documentElement.lang = savedLang; 
+            document.documentElement.dir = savedLang === 'ar' ? 'rtl' : 'ltr'; 
+            document.body.classList.toggle('en', savedLang === 'en');
+            
+            // تعيين الوضع الافتراضي: Desktop + Night
+            document.body.classList.add('device-desktop');
+            setMode('night');
+            setDevice('desktop');
+            
+            console.log('🔍 نظام فحص الواحة جاهز'); 
+            console.log('📄 12 صفحة + 6 ريبوهات + هيكلة ملفات'); 
+            console.log('🇾🇪 من صنعاء إلى الكون');
+            console.log('📊 مركز تشخيص المستودعات متاح في diagnose.html');
+            console.log('🧭 المستكشف متاح في current-auto.html');
+            console.log('🖥️ الإعدادات الافتراضية: Desktop + Night');
+            console.log('📂 زر فتح الملف: يكتب المستخدم اسم الملف ويفتح الرابط الكامل');
         });
-
-        // ============================================================
-        // ===== تبديل اللغة =====
-        // ============================================================
-
-        let currentLang = 'ar';
-
-        document.getElementById('langToggle').addEventListener('click', function(e) {
-            e.preventDefault();
-            const newLang = currentLang === 'ar' ? 'en' : 'ar';
-            currentLang = newLang;
-            document.documentElement.lang = newLang;
-            document.documentElement.dir = newLang === 'ar' ? 'rtl' : 'ltr';
-            document.body.classList.toggle('en', newLang === 'en');
-            document.getElementById('langLabel').textContent = newLang === 'ar' ? 'عربي' : 'English';
-            document.getElementById('settingsLabel').textContent = newLang === 'ar' ? 'إعدادات' : 'Settings';
-        });
-
-        // ============================================================
-        // ===== عداد الزوار =====
-        // ============================================================
-
-        let visitorsCount = 1247;
-        setInterval(() => {
-            visitorsCount += Math.random() > 0.6 ? 1 : 0;
-            const visitorsSpan = document.getElementById('visitorsCount');
-            if (visitorsSpan) {
-                visitorsSpan.textContent = visitorsCount.toLocaleString();
-            }
-        }, 10000);
-
-        // ============================================================
-        // ===== بدء التشغيل =====
-        // ============================================================
-
-        document.body.classList.add('night', 'device-desktop');
-        document.getElementById('nightBtn').classList.add('active');
-        document.getElementById('desktopBtn').classList.add('active');
-        updateStatus();
-
-        video.play().catch(function() {});
-
-        console.log('🌴 واحة الجبري v5.0 - البوابة الرئيسية');
-        console.log('📌 logo.html هو الصفحة الرئيسية (index)');
-        console.log('🔗 جميع الأزرار توجّه إلى Page11.html أو Page12.html');
-        console.log('🎵 الصوت يشتغل عند أول لمسة للشاشة');
-        console.log('🔄 الفيديو يعيد التشغيل تلقائياً (loop)');
-        console.log('👤 نظام المستخدمين والصلاحيات جاهز');
-        console.log('🇾🇪 من صنعاء إلى الكون');
     </script>
-   
-   <script src="/js/menu.js"></script>
-   
+    
+    <script src="/js/menu.js"></script>
     
 </body>
 </html>
