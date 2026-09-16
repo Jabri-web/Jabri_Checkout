@@ -1,138 +1,86 @@
-// ================================================================
-//   service-worker.js - v5.2 (تحديث صامت + مسح أسرع للكاش)
-//   👑 CACHE_NAME = مفتاح التحكم بالإصدارات
-// ================================================================
+const CACHE_NAME = 'heaven-al-jabri-v7.1-gold';
+const CORE_ASSETS = ['/', '/index.html', '/offline.html', '/manifest.json'];
+const NEVER_CACHE = ['/sw.js', '/sitemap.xml', '/robots.txt', '/vercel.json'];
+const FETCH_TIMEOUT = 3000;
 
-const CACHE_NAME = 'heaven-aljabri-v5.2';
-
-// 📦 الملفات المخزّنة (index + header + logo فقط)
-const FILES_TO_CACHE = [
-  './',
-  'index.html',
-  'header.html',
-  'logo.html', // ✅ تم استبدال Page12.html
-  'about-waha.html' // ✅ صفحة الواحة
-];
-
-// ================================================================
-//  📥 التثبيت (Install)
-// ================================================================
-self.addEventListener('install', event => {
-  console.log(`📦 [SW ${CACHE_NAME}] بدء التثبيت...`);
-  
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return Promise.all(
-        FILES_TO_CACHE.map(url => {
-          return cache.add(url).then(() => {
-            console.log(`✅ [SW] تم تخزين: ${url}`);
-          }).catch(err => {
-            console.warn(`⚠️ [SW] فشل تخزين: ${url}`, err.message);
-          });
-        })
-      );
-    }).then(() => {
-      console.log(`✅ [SW ${CACHE_NAME}] تم التثبيت`);
-      return self.skipWaiting(); // 🚀 تفعيل فوري
-    })
+self.addEventListener('install', e => {
+  e.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(c => Promise.allSettled(CORE_ASSETS.map(u => c.add(new Request(u, { cache: 'reload' })))))
+      .then(() => self.skipWaiting())
   );
 });
 
-// ================================================================
-//  🔄 التفعيل (Activate) — حذف الكاش القديم (مسح أسرع)
-// ================================================================
-self.addEventListener('activate', event => {
-  console.log(`🔄 [SW ${CACHE_NAME}] بدء التفعيل...`);
-  
-  event.waitUntil(
-    caches.keys().then(keys => {
-      // 🗑️ حذف كل الكاشات القديمة (مسح أسرع)
-      return Promise.all(
-        keys.filter(k => k !== CACHE_NAME).map(k => {
-          console.log(`🗑️ [SW] حذف الكاش القديم: ${k}`);
-          return caches.delete(k);
-        })
-      );
-    }).then(() => {
-      console.log(`✅ [SW ${CACHE_NAME}] تم التفعيل`);
-      return self.clients.claim(); // 👑 السيطرة على كل التبويبات
-    }).then(() => {
-      // 📢 إبلاغ كل الصفحات بالتحديث (هذا ما سيُظهر الـ Popup)
-      return self.clients.matchAll({ type: 'window' }).then(clients => {
-        clients.forEach(client => {
-          console.log('📢 [SW] إبلاغ الصفحة بالتحديث');
-          client.postMessage({
-            type: 'SW_ACTIVATED',
-            version: CACHE_NAME
-          });
-        });
-      });
-    })
+self.addEventListener('activate', e => {
+  e.waitUntil(
+    caches.keys()
+      .then(keys => Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))))
+      .then(() => self.clients.claim())
+      .then(() => self.clients.matchAll({ type: 'window' }))
+      .then(clients => clients.forEach(c => c.postMessage({ type: 'SW_ACTIVATED', version: CACHE_NAME })))
   );
 });
 
-// ================================================================
-//  🌐 الجلب (Fetch) — Cache First, Network Fallback
-// ================================================================
-self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET') return;
-  
-  const url = event.request.url;
-  if (!url.startsWith(self.location.origin)) {
+function timeoutFetch(req, ms) {
+  return Promise.race([
+    fetch(req),
+    new Promise((_, rej) => setTimeout(() => rej(new Error('SW-timeout')), ms))
+  ]);
+}
+
+self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return;
+  const url = e.request.url;
+
+  if (!url.startsWith(self.location.origin)) return;
+  if (NEVER_CACHE.some(p => url.endsWith(p))) return;
+
+  // HTML — Network First + timeout
+  if (e.request.mode === 'navigate' || e.request.headers.get('accept')?.includes('text/html')) {
+    e.respondWith(
+      timeoutFetch(e.request, FETCH_TIMEOUT)
+        .then(res => {
+          if (res.ok) {
+            const clone = res.clone();
+            caches.open(CACHE_NAME).then(c => c.put(e.request, clone));
+          }
+          return res;
+        })
+        .catch(async () =>
+          (await caches.match(e.request)) ||
+          (await caches.match('/offline.html')) ||
+          (await caches.match('/index.html')) ||
+          new Response('Offline', { status: 503 })
+        )
+    );
     return;
   }
-  
-  event.respondWith(
-    caches.match(event.request).then(cachedResponse => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-      
-      return fetch(event.request)
-        .then(networkResponse => {
-          if (networkResponse && networkResponse.status === 200) {
-            const responseToCache = networkResponse.clone();
-            caches.open(CACHE_NAME).then(cache => {
-              cache.put(event.request, responseToCache);
-            });
+
+  // Static — Stale While Revalidate
+  e.respondWith(
+    caches.match(e.request).then(cached => {
+      const network = timeoutFetch(e.request, FETCH_TIMEOUT)
+        .then(res => {
+          if (res.ok) {
+            const clone = res.clone();
+            caches.open(CACHE_NAME).then(c => c.put(e.request, clone));
           }
-          return networkResponse;
+          return res;
         })
-        .catch(() => {
-          if (event.request.mode === 'navigate') {
-            return caches.match('index.html');
+        .catch(async () => {
+          if (e.request.destination === 'image') {
+            return (await caches.match('/image/Yemen2026.png')) ||
+                   new Response('', { status: 404 });
           }
-          return new Response('Offline', {
-            status: 503,
-            statusText: 'Service Unavailable'
-          });
+          return cached || new Response('', { status: 504 });
         });
+      return cached || network;
     })
   );
 });
 
-// ================================================================
-//  💬 الرسائل من الصفحات (Messages)
-// ================================================================
-self.addEventListener('message', event => {
-  if (!event.data) return;
-  
-  if (event.data.action === 'skipWaiting') {
-    console.log('🚀 [SW] تفعيل فوري بناءً على طلب الصفحة');
-    self.skipWaiting();
-  }
-  
-  if (event.data.action === 'checkVersion') {
-    event.source.postMessage({
-      type: 'VERSION_INFO',
-      version: CACHE_NAME,
-      timestamp: new Date().toISOString()
-    });
-  }
+self.addEventListener('message', e => {
+  if (e.data?.action === 'skipWaiting' || e.data === 'SKIP_WAITING') self.skipWaiting();
+  if (e.data?.action === 'checkVersion')
+    e.source?.postMessage({ type: 'VERSION_INFO', version: CACHE_NAME });
 });
-
-// ================================================================
-//  🎯 جاهز!
-// ================================================================
-console.log(`🌴 [SW ${CACHE_NAME}] جاهز — logo.html + index.html + الصفحات الأساسية`);
-console.log('👑 للتحكم بالإصدارات: غيّر CACHE_NAME فقط');
