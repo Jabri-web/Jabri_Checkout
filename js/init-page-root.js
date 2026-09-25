@@ -1,11 +1,23 @@
-// init-page-root.js — v7.3.2 (No White Screen + Safe 404)
+// init-page-root.js — v7.3.4 (Clean URLs + Auto .html)
 (function(){
   'use strict';
-  console.log('🛡️ [init] v7.3.2...');
+  console.log('🛡️ [init] v7.3.4 (المرعبة المبسطة)...');
+
+  // ✅✅✅ هذا هو السطر السحري الذي كنت تطلبه من البداية ✅✅✅
+  // يضيف .html تلقائياً إذا لم تكن موجودة في الرابط
+  (function() {
+      const path = location.pathname;
+      // إذا لم يكن الرابط ينتهي بـ .html وليس الصفحة الرئيسية
+      if (!path.endsWith('.html') && path !== '/' && !path.endsWith('/')) {
+          const newPath = path + '.html' + location.search + location.hash;
+          console.log('🔄 [المرعبة] تحويل الرابط إلى:', newPath);
+          window.location.replace(newPath);
+          return; // إيقاف التنفيذ لأننا سننتقل لصفحة جديدة
+      }
+  })();
 
   const IS_APK = location.protocol === 'file:' || navigator.userAgent.includes('wv');
 
-  // حل مشكلة المسارات
   function asset(path){
     const clean = path.replace(/^\//,'');
     return IS_APK? clean : '/' + clean;
@@ -18,7 +30,7 @@
     if(m) return m;
     if(s?.hasAttribute('data-no-splash')) return 'safe';
     if(location.pathname.toLowerCase().startsWith('/app/catalog')) return 'safe';
-    return 'full'; // ✅ full افتراضياً
+    return 'full'; 
   }
 
   let PAGE_MODE = detectPageMode();
@@ -31,7 +43,7 @@
     const el = document.getElementById('splashScreen');
     if(el){ el.classList.add('hidden'); setTimeout(()=>{ el.remove(); document.getElementById('splash-style')?.remove(); },700); }
   }
-  // fail-safe لا يترك شاشة بيضاء أبداً
+  
   window.addEventListener('load', ()=> setTimeout(hideSplash, 800));
   setTimeout(hideSplash, 3500);
 
@@ -48,13 +60,11 @@
     document.body.prepend(d);
   }
 
-  // تحميل لا يخرب التصميم
   function loadHTMLFile(id, file, onOk){
     const ph=document.getElementById(id);
     if(!ph){ onOk?.(); return; }
     const url = asset(file);
 
-    // هيكل مؤقت يمنع التخربش
     if(!ph.innerHTML.trim()) ph.innerHTML = '<div style="height:60px"></div>';
 
     fetch(url + (IS_APK?'':'?_t='+Date.now()), {cache:'no-store'})
@@ -62,7 +72,6 @@
      .then(html=>{
         ph.innerHTML = html;
         ph.dataset.loaded='true';
-        // تنفيذ السكربتات بالترتيب
         const scripts=[...ph.querySelectorAll('script')];
         scripts.forEach(old=>{
           if(old.src && old.src.includes('menu.js')) return;
@@ -75,57 +84,6 @@
         onOk?.();
       })
      .catch(()=>{ onOk?.(); });
-  }
-
-  // ✅ v7.3.2: لا يتدخل إذا المسار .html
-  function handle404NonBlocking(){
-    const path = location.pathname;
-
-    // ✅ ① إذا المسار ينتهي بـ .html → تخطي (الصفحة موجودة)
-    if (path.endsWith('.html')) {
-      console.log('ℹ️ [404] مسار .html — تخطي');
-      return;
-    }
-
-    // ✅ ② روابط خاصة
-    if(['/','/ar','/ar/','/en','/en/'].includes(path)) return;
-
-    // ✅ ③ استخرج المسار النظيف
-    const clean = path.replace(/^\/(ar|en)(\/|$)/i,'/');
-    if(clean==='/' || clean==='') return;
-
-    // ✅ ④ حماية ضد loop
-    const key='waha_404_'+path;
-    try{ if(sessionStorage.getItem(key)) return; sessionStorage.setItem(key,'1'); }catch(e){}
-
-    // ✅ ⑤ المرشحات في الثلاثي (مع + بدون .html)
-    const bases = [`/ar${clean}`, `/en${clean}`, clean];
-    let candidates = [];
-    bases.forEach(b=>{
-      if(b===path) return;
-      candidates.push(b);                    // /about-waha
-      candidates.push(b + '.html');          // /about-waha.html
-      candidates.push(b + '/index.html');    // /about-waha/index.html
-    });
-    candidates = [...new Set(candidates)].slice(0,8);
-
-    console.log('🔍 [404] تجرب:', candidates);
-
-    setTimeout(()=>{
-      let i=0;
-      const tryNext=()=>{
-        if(i>=candidates.length) return;
-        fetch(asset(candidates[i]), {method:'HEAD', cache:'no-store'})
-        .then(r=>{
-           if(r.ok){
-             console.log('✅ وجدتها:', candidates[i]);
-             location.replace(candidates[i]+location.search+location.hash);
-           }else{ i++; tryNext(); }
-         })
-        .catch(()=>{ i++; tryNext(); });
-      };
-      tryNext();
-    }, 700);
   }
 
   // اللغة - تحافظ على المسار الفرعي
@@ -158,8 +116,6 @@
       });
 
       if(!document.getElementById('header-placeholder')) hideSplash();
-
-      handle404NonBlocking(); // ✅ غير معطل للصفحة
 
     }catch(e){ console.error(e); hideSplash(); }
   }
