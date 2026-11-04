@@ -1,0 +1,14 @@
+RiemannOS-Audit/
+├── README.md
+├── audit_memo.md
+├── notebooks/
+│ ├── numerical_audit.ipynb
+│ ├── z_kernel.ipynb
+│ ├── c2_calculation.ipynb
+│ └── z_second_derivative.ipynb
+├── scripts/
+│ ├── z_kernel.py
+│ ├── c2_calculation.py
+│ └── z_second_derivative.py
+└── results/
+└── numerical-results.md <--- (هذا الملف)
